@@ -1,7 +1,15 @@
-#include<cstdlib>
-#include<ctime>
 #include<iostream>
-#include<time.h>
+#include<string>
+#include<ctime>
+#include<cstdlib>
+
+#include<fstream>
+#include<sstream>
+#include<vector>
+
+#include<stack>
+#include<map>
+#include<memory>
 
 #include<SFML/System.hpp>
 #include<SFML/Graphics.hpp>
