@@ -49,11 +49,11 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["GAME_STATE"] = new Button(315, 350, 150, 50,
+	this->buttons["GAME_STATE"] = new Button(835, 615, 250, 100,
 		&this->font, "Start",
 		Color(100, 100, 100, 200), Color(150, 150, 150, 255), Color(20, 20, 20, 200));
 
-	this->buttons["EXIT_STATE"] = new Button(315, 450, 150, 50,
+	this->buttons["EXIT_STATE"] = new Button(835, 765, 250, 100,
 		&this->font, "Quit",
 		Color(100, 100, 100, 200), Color(150, 150, 150, 255), Color(20, 20, 20, 200));
 }
@@ -130,13 +130,13 @@ void MainMenuState::render(RenderTarget* target)
 
 	this->renderButtons(target);
 
-	Text mouseText;
-	mouseText.setPosition(this->mousePosView);
+	/*Text mouseText;
+	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 50);
 	mouseText.setFont(this->font);
-	mouseText.setCharacterSize(30);
+	mouseText.setCharacterSize(24);
 	stringstream ss;
 	ss << this->mousePosView.x << " , " << this->mousePosView.y;
 	mouseText.setString(ss.str());
 
-	target->draw(mouseText);
+	target->draw(mouseText);*/
 }
