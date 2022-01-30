@@ -50,12 +50,19 @@ void MainMenuState::initKeybinds()
 void MainMenuState::initButtons()
 {
 	this->buttons["GAME_STATE"] = new Button(835, 615, 250, 100,
-		&this->font, "Start",
-		Color(100, 100, 100, 200), Color(150, 150, 150, 255), Color(20, 20, 20, 200));
+		&this->font, "Start", 60,
+		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
+		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
-	this->buttons["EXIT_STATE"] = new Button(835, 765, 250, 100,
-		&this->font, "Quit",
-		Color(100, 100, 100, 200), Color(150, 150, 150, 255), Color(20, 20, 20, 200));
+	this->buttons["EDITOR_STATE"] = new Button(835, 750, 250, 100,
+		&this->font, "Editor", 60,
+		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
+		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["EXIT_STATE"] = new Button(835, 885, 250, 100,
+		&this->font, "Quit", 60,
+		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
+		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 }
 
 MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
@@ -77,14 +84,9 @@ MainMenuState::~MainMenuState()
 	}
 }
 
-void MainMenuState::endState()
-{
-	cout << "Ending ManiMenuState\n";
-}
-
 void MainMenuState::updateInput(const float& dt)
 {
-	this->checkForQuit();
+
 }
 
 void MainMenuState::updateButtons()
@@ -99,9 +101,14 @@ void MainMenuState::updateButtons()
 		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 	}
 
+	if (this->buttons["EDITOR_STATE"]->isPressed())
+	{
+		this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
+	}
+
 	if (this->buttons["EXIT_STATE"]->isPressed())
 	{
-		this->quit = true;
+		this->endState();
 	}
 }
 

@@ -1,16 +1,13 @@
-#ifndef MAINMENUSTATE_H
-#define MAINMENUSTATE_H
+#ifndef EDITORSTATE_H
+#define EDITORSTATE_H
 
-#include "GameState.h"
-#include "EditorState.h"
+#include "State.h"
 #include "Button.h"
 
-class MainMenuState :
+class EditorState :
     public State
 {
 private:
-    Texture backgroundTexture;
-    RectangleShape background;
     Font font;
 
     map<string, Button*> buttons;
@@ -22,8 +19,8 @@ private:
     void initButtons();
 
 public:
-    MainMenuState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
-    virtual ~MainMenuState();
+    EditorState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
+    virtual ~EditorState();
 
     void updateInput(const float& dt);
     void updateButtons();
