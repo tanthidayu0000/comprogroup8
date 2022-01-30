@@ -16,7 +16,7 @@
     <Filter Include="State">
       <UniqueIdentifier>{b215f3dc-4eb7-47eb-8a0e-14f38f77e583}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities">
+    <Filter Include="Player">
       <UniqueIdentifier>{0ee3bf08-2c6b-4c70-834d-367bc5073582}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -42,11 +42,11 @@
     <ClCompile Include="Button.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Entities</Filter>
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorState.cpp">
+      <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,11 +68,11 @@
     <ClInclude Include="Button.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Entities</Filter>
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

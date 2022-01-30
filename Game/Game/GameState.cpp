@@ -18,34 +18,68 @@ void GameState::initKeybinds()
 	ifs.close();
 }
 
+void GameState::initPlayers()
+{
+	this->player = new Player();
+}
+
 GameState::GameState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
 	: State(window, supportedKeys, states)
 {
 	this->initKeybinds();
+	this->initPlayers();
 }
 
 GameState::~GameState()
 {
-
-}
-
-void GameState::endState()
-{
-	cout << "Ending GameState\n";
+	delete this->player;
 }
 
 void GameState::updateInput(const float& dt)
 {
-	this->checkForQuit();
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
+	//this->player->
+	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
+	//this->player->
+	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))));
+	//this->player->
+	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))));
+		//this->player->
 
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))))
-		this->player.move(dt, -1.f, 0.f);
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))))
-		this->player.move(dt, 1.f, 0.f);
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_UP"))))
-		this->player.move(dt, 0.f, -1.f);
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
-		this->player.move(dt, 0.f, 1.f);
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("CLOSE"))))
+		this->endState();
+
+}
+
+void GameState::updateCollision()
+{
+	if (this->player->getGlobalBounds().top + this->player->getGlobalBounds().height > this->window->getSize().y)
+	{
+		this->player->resetVelocityY();
+		this->player->setPosition
+		(
+			this->player->getGlobalBounds().left,
+			this->window->getSize().y - this->player->getGlobalBounds().height
+		);
+	}
+	if (this->player->getGlobalBounds().left + this->player->getGlobalBounds().width > this->window->getSize().x)
+	{
+		this->player->resetVelocityX();
+		this->player->setPosition
+		(
+			this->window->getSize().x - this->player->getGlobalBounds().width,
+			this->player->getGlobalBounds().top
+		);
+	}
+	if (this->player->getGlobalBounds().left + this->player->getGlobalBounds().width < this->player->getGlobalBounds().width)
+	{
+		this->player->resetVelocityX();
+		this->player->setPosition
+		(
+			0.f,
+			this->player->getGlobalBounds().top
+		);
+	}
 }
 
 void GameState::update(const float& dt)
@@ -53,7 +87,8 @@ void GameState::update(const float& dt)
 	this->updateMousePosition();
 	this->updateInput(dt);
 
-	this->player.update(dt);
+	this->player->update();
+	this->updateCollision();
 }
 
 void GameState::render(RenderTarget* target)
@@ -61,5 +96,5 @@ void GameState::render(RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	this->player.render(this->window);
+	this->player->render(this->window);
 }
