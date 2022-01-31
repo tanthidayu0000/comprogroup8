@@ -38,11 +38,11 @@ GameState::~GameState()
 void GameState::updateInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
-	//this->player->
+		//this->player->
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
-	//this->player->
+		//this->player->
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))));
-	//this->player->
+		//this->player->
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))));
 		//this->player->
 

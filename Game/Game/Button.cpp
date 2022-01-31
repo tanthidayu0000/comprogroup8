@@ -17,9 +17,13 @@ Button::Button(float x, float y, float width, float hieght,
 	this->text.setString(text);
 	this->text.setFillColor(text_idleColor);
 	this->text.setCharacterSize(char_size);
+	this->text.setOrigin(
+		this->text.getLocalBounds().left + this->text.getLocalBounds().width / 2.f, 
+		this->text.getLocalBounds().top + this->text.getLocalBounds().height / 2.f
+	);
 	this->text.setPosition(
-		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
-		this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height
+		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f),
+		this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f)
 	);
 
 	this->text_idleColor = text_idleColor;

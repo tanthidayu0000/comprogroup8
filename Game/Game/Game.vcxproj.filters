@@ -19,6 +19,9 @@
     <Filter Include="Player">
       <UniqueIdentifier>{0ee3bf08-2c6b-4c70-834d-367bc5073582}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{a09600f0-8b28-4cfa-a4cc-3b55c1836111}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
