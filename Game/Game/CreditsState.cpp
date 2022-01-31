@@ -21,7 +21,7 @@ void CreditsState::initFonts()
 
 void CreditsState::initKeybinds()
 {
-	ifstream ifs("Config/editorstate_keybinds.ini");
+	ifstream ifs("Config/creditsstate_keybinds.ini");
 
 	if (ifs.is_open())
 	{
@@ -86,7 +86,7 @@ void CreditsState::renderButtons(RenderTarget* target)
 {
 	for (auto& it : this->buttons)
 	{
-		it.second->render(target);
+		it.second->render(*target);
 	}
 }
 
