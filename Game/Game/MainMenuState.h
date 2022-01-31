@@ -2,7 +2,7 @@
 #define MAINMENUSTATE_H
 
 #include "GameState.h"
-#include "EditorState.h"
+#include "CreditsState.h"
 #include "Button.h"
 
 class MainMenuState :

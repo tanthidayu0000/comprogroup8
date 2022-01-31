@@ -1,10 +1,10 @@
-#ifndef EDITORSTATE_H
-#define EDITORSTATE_H
+#ifndef CREDITSSTATE_H
+#define CREDITSSTATE_H
 
 #include "State.h"
 #include "Button.h"
 
-class EditorState :
+class CreditsState :
     public State
 {
 private:
@@ -19,8 +19,8 @@ private:
     void initButtons();
 
 public:
-    EditorState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
-    virtual ~EditorState();
+    CreditsState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
+    virtual ~CreditsState();
 
     void updateInput(const float& dt);
     void updateButtons();

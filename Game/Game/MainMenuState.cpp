@@ -54,8 +54,8 @@ void MainMenuState::initButtons()
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
-	this->buttons["EDITOR_STATE"] = new Button(835, 750, 250, 100,
-		&this->font, "Editor", 60,
+	this->buttons["CREDITS_STATE"] = new Button(835, 750, 250, 100,
+		&this->font, "Credits", 60,
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
@@ -101,9 +101,9 @@ void MainMenuState::updateButtons()
 		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 	}
 
-	if (this->buttons["EDITOR_STATE"]->isPressed())
+	if (this->buttons["CREDITS_STATE"]->isPressed())
 	{
-		this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
+		this->states->push(new CreditsState(this->window, this->supportedKeys, this->states));
 	}
 
 	if (this->buttons["EXIT_STATE"]->isPressed())

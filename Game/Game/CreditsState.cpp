@@ -1,17 +1,17 @@
 #include "includeAll.h"
-#include "EditorState.h"
+#include "CreditsState.h"
 
-void EditorState::innitVariables()
+void CreditsState::innitVariables()
 {
 
 }
 
-void EditorState::initBackground()
+void CreditsState::initBackground()
 {
 	
 }
 
-void EditorState::initFonts()
+void CreditsState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
 	{
@@ -19,7 +19,7 @@ void EditorState::initFonts()
 	}
 }
 
-void EditorState::initKeybinds()
+void CreditsState::initKeybinds()
 {
 	ifstream ifs("Config/editorstate_keybinds.ini");
 
@@ -36,12 +36,12 @@ void EditorState::initKeybinds()
 	ifs.close();
 }
 
-void EditorState::initButtons()
+void CreditsState::initButtons()
 {
 	
 }
 
-EditorState::EditorState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
+CreditsState::CreditsState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
 	: State(window, supportedKeys, states)
 {
 	this->innitVariables();
@@ -51,7 +51,7 @@ EditorState::EditorState(RenderWindow* window, map<string, int>* supportedKeys, 
 	this->initButtons();
 }
 
-EditorState::~EditorState()
+CreditsState::~CreditsState()
 {
 	auto it = this->buttons.begin();
 	for (it = this->buttons.begin(); it != this->buttons.end(); ++it)
@@ -60,13 +60,13 @@ EditorState::~EditorState()
 	}
 }
 
-void EditorState::updateInput(const float& dt)
+void CreditsState::updateInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("CLOSE"))))
 		this->endState();
 }
 
-void EditorState::updateButtons()
+void CreditsState::updateButtons()
 {
 	for (auto& it : this->buttons)
 	{
@@ -74,7 +74,7 @@ void EditorState::updateButtons()
 	}
 }
 
-void EditorState::update(const float& dt)
+void CreditsState::update(const float& dt)
 {
 	this->updateMousePosition();
 	this->updateInput(dt);
@@ -82,7 +82,7 @@ void EditorState::update(const float& dt)
 	this->updateButtons();
 }
 
-void EditorState::renderButtons(RenderTarget* target)
+void CreditsState::renderButtons(RenderTarget* target)
 {
 	for (auto& it : this->buttons)
 	{
@@ -90,7 +90,7 @@ void EditorState::renderButtons(RenderTarget* target)
 	}
 }
 
-void EditorState::render(RenderTarget* target)
+void CreditsState::render(RenderTarget* target)
 {
 	if (!target)
 		target = this->window;

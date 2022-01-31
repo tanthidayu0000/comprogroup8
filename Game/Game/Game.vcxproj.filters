@@ -48,7 +48,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="EditorState.cpp">
+    <ClCompile Include="CreditsState.cpp">
       <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="EditorState.h">
+    <ClInclude Include="CreditsState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
