@@ -18,6 +18,22 @@ void GameState::initKeybinds()
 	ifs.close();
 }
 
+void GameState::initFonts()
+{
+	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
+	{
+		throw("ERROR::MIANMENUSTATE::CLOUD NOT LOAD FONT");
+	}
+}
+
+void GameState::initPauseMenu()
+{
+	this->pmenu = new PauseMenu(*this->window, this->font);
+
+	this->pmenu->addButton("RESUME", 500.f, "Resume");
+	this->pmenu->addButton("QUIT", 600.f, "Quit");
+}
+
 void GameState::initPlayers()
 {
 	this->player = new Player();
@@ -27,28 +43,38 @@ GameState::GameState(RenderWindow* window, map<string, int>* supportedKeys, stac
 	: State(window, supportedKeys, states)
 {
 	this->initKeybinds();
+	this->initFonts();
+	this->initPauseMenu();
 	this->initPlayers();
 }
 
 GameState::~GameState()
 {
+	delete this->pmenu;
 	delete this->player;
 }
 
 void GameState::updateInput(const float& dt)
 {
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())
+	{
+		if (!this->paused)
+			this->pauseState();
+		else
+			this->unpauseState();
+	}
+}
+
+void GameState::updatePlayerInput(const float& dt)
+{
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
-		//this->player->
+		//this->player->animState(MOVE_LEFT);
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
-		//this->player->
+		//this->player->animState(MOVE_RIGHT);
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))));
-		//this->player->
+		//this->player->animState(JUMPING);
 	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))));
-		//this->player->
-
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("CLOSE"))))
-		this->endState();
-
+		//this->player->animState(FALLING);
 }
 
 void GameState::updateCollision()
@@ -82,13 +108,34 @@ void GameState::updateCollision()
 	}
 }
 
+void GameState::updatePauseMenuButtons()
+{
+	if (this->pmenu->isButtonPressed("QUIT"))
+		this->endState();
+	
+	if (this->pmenu->isButtonPressed("RESUME"))
+		this->unpauseState();
+}
+
 void GameState::update(const float& dt)
 {
 	this->updateMousePosition();
+	this->updateKeyTime(dt);
 	this->updateInput(dt);
+	
+	if (!this->paused)
+	{
+		this->updatePlayerInput(dt);
 
-	this->player->update();
-	this->updateCollision();
+		this->player->update();
+		this->updateCollision();
+	}
+	else
+	{
+		this->pmenu->update(this->mousePosView);
+		this->updatePauseMenuButtons();
+	}
+	
 }
 
 void GameState::render(RenderTarget* target)
@@ -97,4 +144,9 @@ void GameState::render(RenderTarget* target)
 		target = this->window;
 
 	this->player->render(this->window);
+
+	if (this->paused)
+	{
+		this->pmenu->render(*target);
+	}
 }

@@ -49,17 +49,20 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["GAME_STATE"] = new Button(835, 615, 250, 100,
+	this->buttons["GAME_STATE"] = new Button(
+		835.f, 700.f, 250.f, 100.f,
 		&this->font, "Start", 60,
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
-	this->buttons["CREDITS_STATE"] = new Button(835, 750, 250, 100,
+	this->buttons["CREDITS_STATE"] = new Button(
+		835.f, 800.f, 250.f, 100.f,
 		&this->font, "Credits", 60,
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
-	this->buttons["EXIT_STATE"] = new Button(835, 885, 250, 100,
+	this->buttons["EXIT_STATE"] = new Button(
+		835.f, 900.f, 250.f, 100.f,
 		&this->font, "Quit", 60,
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
@@ -124,7 +127,7 @@ void MainMenuState::renderButtons(RenderTarget* target)
 {
 	for (auto& it : this->buttons)
 	{
-		it.second->render(target);
+		it.second->render(*target);
 	}
 }
 

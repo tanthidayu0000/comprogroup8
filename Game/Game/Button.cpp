@@ -49,7 +49,7 @@ const bool Button::isPressed() const
 	return false;
 }
 
-void Button::update(Vector2f mousePos)
+void Button::update(const Vector2f& mousePos)
 {
 	this->buttonState = BTN_IDLE;
 
@@ -87,8 +87,8 @@ void Button::update(Vector2f mousePos)
 	}
 }
 
-void Button::render(RenderTarget* target)
+void Button::render(RenderTarget& target)
 {
-	target->draw(this->shape);
-	target->draw(this->text);
+	target.draw(this->shape);
+	target.draw(this->text);
 }
