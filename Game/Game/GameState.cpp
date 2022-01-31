@@ -60,8 +60,6 @@ void GameState::updateInput(const float& dt)
 	{
 		if (!this->paused)
 			this->pauseState();
-		else
-			this->unpauseState();
 	}
 }
 
