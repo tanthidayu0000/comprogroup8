@@ -43,7 +43,7 @@ PauseMenu::~PauseMenu()
 	}
 }
 
-map<string, Button*>& PauseMenu::getButtons()
+map<string, gui::Button*>& PauseMenu::getButtons()
 {
 	return this->buttons;
 }
@@ -55,10 +55,10 @@ const bool PauseMenu::isButtonPressed(const string key)
 
 void PauseMenu::addButton(const string key, float y, const string text)
 {
-	float width = 250.f;
-	float height = 100.f;
+	float width = 200.f;
+	float height = 80.f;
 	float x = this->container.getPosition().x + this->container.getSize().x / 2.f - width / 2.f;
-	this->buttons[key] = new Button(
+	this->buttons[key] = new gui::Button(
 		x, y, width, height,
 		&this->font, text, 60,
 		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
