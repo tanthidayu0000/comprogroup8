@@ -21,6 +21,7 @@ void Player::initSprite()
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(1.5f, 1.5f);
+	this->sprite.setPosition(0.f, 1000.f);
 }
 
 void Player::initAnimations()
@@ -104,17 +105,17 @@ void Player::updateMovement()
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::A))
+	if (Keyboard::isKeyPressed(Keyboard::Key::A) || Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
 		this->move(-1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		this->animState = PLAYER_ANIMATION_STATES::MOVE_LEFT;
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Key::D))
+	else if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
 		this->move(1.f, 0.f);
-		this->animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		this->animState = PLAYER_ANIMATION_STATES::MOVE_RIGHT;
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Key::W))
+	else if (Keyboard::isKeyPressed(Keyboard::Key::W) || Keyboard::isKeyPressed(Keyboard::Key::Up))
 	{
 		if (this->velocity.y != 0.f)
 			this->onGround = false;
@@ -132,7 +133,7 @@ void Player::updateMovement()
 
 		this->animState = PLAYER_ANIMATION_STATES::JUMPING;
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Key::S))
+	else if (Keyboard::isKeyPressed(Keyboard::Key::S) || Keyboard::isKeyPressed(Keyboard::Key::Down))
 	{
 		if (this->velocity.y != 0.f)
 			this->onGround = false;
@@ -159,7 +160,7 @@ void Player::updateAnimations()
 			this->sprite.setTextureRect(this->currentFrame);
 		}
 	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVE_RIGHT)
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f)
 		{
@@ -172,7 +173,7 @@ void Player::updateAnimations()
 			this->sprite.setTextureRect(this->currentFrame);
 		}
 	}
-	else if (this->animState == PLAYER_ANIMATION_STATES::MOVING_LEFT)
+	else if (this->animState == PLAYER_ANIMATION_STATES::MOVE_LEFT)
 	{
 		if (this->animationTimer.getElapsedTime().asSeconds() >= 0.1f)
 		{
