@@ -6,22 +6,6 @@ void MainMenuState::innitVariables()
 
 }
 
-void MainMenuState::initBackground()
-{
-	this->background.setSize
-	(
-		Vector2f
-		(static_cast<float>(this->window->getSize().x), 
-			static_cast<float>(this->window->getSize().y)
-		)
-	);
-
-	if (!this->backgroundTexture.loadFromFile("Background/MainMenu.jpeg"))
-		throw"ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
-
-	this->background.setTexture(&this->backgroundTexture);
-}
-
 void MainMenuState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
@@ -47,35 +31,65 @@ void MainMenuState::initKeybinds()
 	ifs.close();
 }
 
-void MainMenuState::initButtons()
+void MainMenuState::initGui()
 {
-	this->buttons["GAME_STATE"] = new Button(
-		835.f, 700.f, 250.f, 100.f,
-		&this->font, "Start", 60,
-		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
-		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->buttons["CREDITS_STATE"] = new Button(
-		835.f, 800.f, 250.f, 100.f,
-		&this->font, "Credits", 60,
-		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
-		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+	this->background.setSize(
+		Vector2f(
+			static_cast<float>(vm.width),
+			static_cast<float>(vm.height)
+		)
+	);
 
-	this->buttons["EXIT_STATE"] = new Button(
-		835.f, 900.f, 250.f, 100.f,
-		&this->font, "Quit", 60,
-		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
+	if (!this->backgroundTexture.loadFromFile("Background/MainMenu.jpeg"))
+		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
+
+	this->background.setTexture(&this->backgroundTexture);
+	
+	this->buttons["GAME_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(62.f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Start", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["CONTROL_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(69.4f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Control", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["SETTING_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(76.9f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Setting", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["CREDITS_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(84.3f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Credits", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["EXIT_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(91.7f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Quit", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 }
 
-MainMenuState::MainMenuState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
-	: State(window, supportedKeys, states)
+MainMenuState::MainMenuState(StateData* stateData)
+	: State(stateData)
 {
 	this->innitVariables();
-	this->initBackground();
 	this->initFonts();
 	this->initKeybinds();
-	this->initButtons();
+	this->initGui();
 }
 
 MainMenuState::~MainMenuState()
@@ -92,7 +106,7 @@ void MainMenuState::updateInput(const float& dt)
 
 }
 
-void MainMenuState::updateButtons()
+void MainMenuState::updateGui()
 {
 	for (auto &it : this->buttons)
 	{
@@ -101,18 +115,30 @@ void MainMenuState::updateButtons()
 
 	if (this->buttons["GAME_STATE"]->isPressed())
 	{
-		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
+		this->states->push(new GameState(this->stateData));
+	}
+
+	if (this->buttons["CONTROL_STATE"]->isPressed())
+	{
+		this->states->push(new ControlState(this->stateData));
+	}
+
+	if (this->buttons["SETTING_STATE"]->isPressed())
+	{
+		this->states->pop();
+		this->states->push(new SettingState(this->stateData));
 	}
 
 	if (this->buttons["CREDITS_STATE"]->isPressed())
 	{
-		this->states->push(new CreditsState(this->window, this->supportedKeys, this->states));
+		this->states->push(new CreditsState(this->stateData));
 	}
 
 	if (this->buttons["EXIT_STATE"]->isPressed())
 	{
 		this->endState();
 	}
+
 }
 
 void MainMenuState::update(const float& dt)
@@ -120,14 +146,14 @@ void MainMenuState::update(const float& dt)
 	this->updateMousePosition();
 	this->updateInput(dt);
 
-	this->updateButtons();
+	this->updateGui();
 }
 
-void MainMenuState::renderButtons(RenderTarget* target)
+void MainMenuState::renderGui(RenderTarget& target)
 {
-	for (auto& it : this->buttons)
+	for (auto &it : this->buttons)
 	{
-		it.second->render(*target);
+		it.second->render(target);
 	}
 }
 
@@ -138,10 +164,10 @@ void MainMenuState::render(RenderTarget* target)
 
 	target->draw(this->background);
 
-	this->renderButtons(target);
+	this->renderGui(*target);
 
 	/*Text mouseText;
-	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 50);
+	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 25);
 	mouseText.setFont(this->font);
 	mouseText.setCharacterSize(24);
 	stringstream ss;

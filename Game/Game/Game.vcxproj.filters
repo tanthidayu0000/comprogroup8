@@ -22,6 +22,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{a09600f0-8b28-4cfa-a4cc-3b55c1836111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{15a2899f-0448-4c1f-afdd-6ffe42d1f51a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,17 +45,26 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="CreditsState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenu.cpp">
+    <ClCompile Include="ControlState.cpp">
       <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +83,26 @@
     <ClInclude Include="MainMenuState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="CreditsState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.h">
+    <ClInclude Include="ControlState.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSettings.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

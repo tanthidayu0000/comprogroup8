@@ -2,6 +2,21 @@
 #define STATE_H
 
 #include "Player.h"
+#include "GraphicsSettings.h"
+
+class Player;
+class GraphicsSettings;
+class State;
+
+class StateData
+{
+public:
+	RenderWindow* window;
+	GraphicsSettings* gfxSettings;
+	map<string, int>* supportedKeys;
+	stack<State*>* states;
+
+};
 
 class State
 {
@@ -9,6 +24,7 @@ private:
 
 
 protected:
+	StateData* stateData;
 	stack<State*>* states;
 	RenderWindow* window;
 	map<string, int>* supportedKeys;
@@ -27,7 +43,7 @@ protected:
 	virtual void initKeybinds() = 0;
 
 public:
-	State(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
+	State(StateData* stateData);
 	virtual ~State();
 
 	const bool& getQuit() const;

@@ -5,6 +5,10 @@ enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
 
 namespace gui
 {
+	const float p2pX(const float perc, const VideoMode& vm);
+	const float p2pY(const float perc, const VideoMode& vm);
+	const unsigned calcCharSize(const VideoMode& vm, const unsigned modifier = 60);
+
 	class Button
 	{
 	private:
@@ -34,7 +38,7 @@ namespace gui
 			Color idleColor, Color hoverColor, Color activeColor,
 			Color outline_idleColor = Color::Transparent, Color outline_hoverColor = Color::Transparent, Color outline_activeColor = Color::Transparent,
 			short unsigned id = 0);
-		virtual ~Button();
+		~Button();
 
 		const bool isPressed() const;
 		const string getText() const;
@@ -53,14 +57,19 @@ namespace gui
 		float keyTime;
 		float keyTimeMax;
 
-		Font font;
+		Font& font;
 		gui::Button* activeElement;
 		vector<gui::Button*> list;
 		bool showList;
 
 	public:
-		DropDownList(float x, float y, float width, float height, Font& font, string list[], unsigned nrOfElement, unsigned default_index = 0);
+		DropDownList(float x, float y, float width, float height,
+			Font& font, string list[], 
+			unsigned nrOfElement, unsigned default_index = 0);
 		~DropDownList();
+
+		const string getActiveElementText() const;
+		const unsigned short& getActiveElementId() const;
 
 		const bool getKeyTime();
 		void updateKeyTime(const float& dt);

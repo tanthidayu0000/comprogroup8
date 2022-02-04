@@ -6,11 +6,10 @@
 class Game
 {
 private:
+	GraphicsSettings gfxSettings;
+	StateData stateData;
 	RenderWindow* window;
 	Event sfEvent;
-	vector<VideoMode> videoModes;
-	ContextSettings windowSettings;
-	bool fullscreen;
 
 	Clock dtClock;
 	float dt;
@@ -20,8 +19,10 @@ private:
 	map<string, int> supportedKeys;
 
 	void initVariables();
+	void initGraphicsSettings();
 	void initWindow();
 	void initKeys();
+	void initStateData();
 	void initStates();
 
 public:

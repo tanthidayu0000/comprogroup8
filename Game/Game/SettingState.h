@@ -1,13 +1,11 @@
-#ifndef MAINMENUSTATE_H
-#define MAINMENUSTATE_H
+#ifndef SETTINGSTATE_H
+#define SETTINGSTATE_H
 
-#include "GameState.h"
-#include "ControlState.h"
-#include "SettingState.h"
-#include "CreditsState.h"
+#include "State.h"
+#include "MainMenuState.h"
 #include "Gui.h"
 
-class MainMenuState :
+class SettingState :
     public State
 {
 private:
@@ -16,18 +14,27 @@ private:
     Font font;
 
     map<string, gui::Button*> buttons;
+    map<string, gui::DropDownList*> dropDownList;
+
+    Text Resolution;
+    Text Fullscreen;
+    Text Vsync;
+    Text Antialiasing;
+
+    vector<VideoMode> modes;
 
     void innitVariables();
     void initFonts();
     void initKeybinds();
     void initGui();
+    void resetGui();
 
 public:
-    MainMenuState(StateData* stateData);
-    virtual ~MainMenuState();
+    SettingState(StateData* stateData);
+    virtual ~SettingState();
 
     void updateInput(const float& dt);
-    void updateGui();
+    void updateGui(const float& dt);
     void update(const float& dt);
     void renderGui(RenderTarget& target);
     void render(RenderTarget* target = NULL);

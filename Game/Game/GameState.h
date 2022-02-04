@@ -19,11 +19,11 @@ private:
     void initPlayers();
 
 public:
-    GameState(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states);
+    GameState(StateData* stateData);
     virtual ~GameState();
 
     void updateInput(const float& dt);
-    void updatePlayerInput(const float& dt);
+    //void updatePlayerInput(const float& dt);
     void updateCollision();
     void updatePauseMenuButtons();
     void update(const float& dt);

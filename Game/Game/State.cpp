@@ -1,11 +1,12 @@
 #include "includeAll.h"
 #include "State.h"
 
-State::State(RenderWindow* window, map<string, int>* supportedKeys, stack<State*>* states)
+State::State(StateData* stateData)
 {
-	this->window = window;
-	this->supportedKeys = supportedKeys;
-	this->states = states;
+	this->stateData = stateData;
+	this->window = stateData->window;
+	this->supportedKeys = stateData->supportedKeys;
+	this->states = stateData->states;
 	this->quit = false;
 	this->paused = false;
 	this->keytime = 0.f;

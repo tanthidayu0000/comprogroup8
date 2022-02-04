@@ -1,17 +1,17 @@
 #include "includeAll.h"
-#include "CreditsState.h"
+#include "ControlState.h"
 
-void CreditsState::innitVariables()
+void ControlState::innitVariables()
 {
 
 }
 
-void CreditsState::initBackground()
+void ControlState::initBackground()
 {
-	
+
 }
 
-void CreditsState::initFonts()
+void ControlState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
 	{
@@ -19,9 +19,9 @@ void CreditsState::initFonts()
 	}
 }
 
-void CreditsState::initKeybinds()
+void ControlState::initKeybinds()
 {
-	ifstream ifs("Config/creditsstate_keybinds.ini");
+	ifstream ifs("Config/controlstate_keybinds.ini");
 
 	if (ifs.is_open())
 	{
@@ -36,12 +36,12 @@ void CreditsState::initKeybinds()
 	ifs.close();
 }
 
-void CreditsState::initGui()
+void ControlState::initGui()
 {
-	
+
 }
 
-CreditsState::CreditsState(StateData* stateData)
+ControlState::ControlState(StateData* stateData)
 	: State(stateData)
 {
 	this->innitVariables();
@@ -51,7 +51,7 @@ CreditsState::CreditsState(StateData* stateData)
 	this->initGui();
 }
 
-CreditsState::~CreditsState()
+ControlState::~ControlState()
 {
 	auto it = this->buttons.begin();
 	for (it = this->buttons.begin(); it != this->buttons.end(); ++it)
@@ -60,13 +60,13 @@ CreditsState::~CreditsState()
 	}
 }
 
-void CreditsState::updateInput(const float& dt)
+void ControlState::updateInput(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("CLOSE"))))
 		this->endState();
 }
 
-void CreditsState::updateGui()
+void ControlState::updateGui()
 {
 	for (auto& it : this->buttons)
 	{
@@ -74,7 +74,7 @@ void CreditsState::updateGui()
 	}
 }
 
-void CreditsState::update(const float& dt)
+void ControlState::update(const float& dt)
 {
 	this->updateMousePosition();
 	this->updateInput(dt);
@@ -82,7 +82,7 @@ void CreditsState::update(const float& dt)
 	this->updateGui();
 }
 
-void CreditsState::renderGui(RenderTarget* target)
+void ControlState::renderGui(RenderTarget* target)
 {
 	for (auto& it : this->buttons)
 	{
@@ -90,7 +90,7 @@ void CreditsState::renderGui(RenderTarget* target)
 	}
 }
 
-void CreditsState::render(RenderTarget* target)
+void ControlState::render(RenderTarget* target)
 {
 	if (!target)
 		target = this->window;

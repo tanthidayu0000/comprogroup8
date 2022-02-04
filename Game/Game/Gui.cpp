@@ -1,6 +1,22 @@
 #include "includeAll.h"
 #include "Gui.h"
 
+const float gui::p2pX(const float perc, const VideoMode& vm)
+{
+	return floor(static_cast<float>(vm.width) * (perc / 100.f));
+}
+
+const float gui::p2pY(const float perc, const VideoMode& vm)
+{
+	return floor(static_cast<float>(vm.height) * (perc / 100.f));
+}
+
+const unsigned gui::calcCharSize(const VideoMode& vm, const unsigned modifier)
+{
+
+	return static_cast<unsigned>((vm.width + vm.height) / modifier);
+}
+
 gui::Button::Button(float x, float y, float width, float hieght,
 	Font* font, string text, unsigned char_size,
 	Color text_idleColor, Color text_hoverColor, Color txet_activeColor,
@@ -14,6 +30,8 @@ gui::Button::Button(float x, float y, float width, float hieght,
 	this->shape.setPosition(Vector2f(x, y));
 	this->shape.setSize(Vector2f(width, hieght));
 	this->shape.setFillColor(idleColor);
+	this->shape.setOutlineThickness(1.f);
+	this->shape.setOutlineColor(outline_idleColor);
 
 	this->font = font;
 	this->text.setFont(*this->font);
@@ -31,9 +49,7 @@ gui::Button::Button(float x, float y, float width, float hieght,
 
 	this->text_idleColor = text_idleColor;
 	this->text_hoverColor = text_hoverColor;
-	this->text_activeColor = text_activeColor;
-	this->shape.setOutlineThickness(1.f);
-	this->shape.setOutlineColor(outline_idleColor);
+	this->text_activeColor = txet_activeColor;
 
 	this->idleColor = idleColor;
 	this->hoverColor = hoverColor;
@@ -74,7 +90,7 @@ void gui::Button::setText(const string text)
 
 void gui::Button::setId(const short unsigned id)
 {
-	this->id - id;
+	this->id = id;
 }
 
 void gui::Button::update(const Vector2f& mousePos)
@@ -130,12 +146,11 @@ gui::DropDownList::DropDownList(float x, float y, float width, float height,
 	unsigned nrOfElement, unsigned default_index)
 	:font(font), showList(false), keyTimeMax(2.f), keyTime(0.f)
 {
-	//unsigned nrOfElement = sizeof(list) / sizeof(string);
 	this->activeElement = new gui::Button(
 		x, y, width, height,
-		&this->font, list[default_index], 40,
+		&this->font, list[default_index], 20,
 		Color(255, 255, 255, 150), Color(255, 255, 255, 200), Color(20, 20, 20, 50),
-		Color(70, 70, 70, 200), Color(150, 150, 150, 200), Color(20, 20, 20, 200),
+		Color(70, 70, 70, 255), Color(150, 150, 150, 255), Color(20, 20, 20, 255),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50)
 	);
 
@@ -144,9 +159,9 @@ gui::DropDownList::DropDownList(float x, float y, float width, float height,
 		this->list.push_back(
 			new gui::Button(
 				x, y + ((i+1) * height), width, height,
-				&this->font, list[i], 40,
+				&this->font, list[i], 20,
 				Color(255, 255, 255, 150), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
-				Color(70, 70, 70, 200), Color(150, 150, 150, 200), Color(20, 20, 20, 200),
+				Color(70, 70, 70, 255), Color(150, 150, 150, 255), Color(20, 20, 20, 255),
 				Color(255, 255, 255, 0), Color(255, 255, 255, 0), Color(20, 20, 20, 0),
 				i
 			)
@@ -162,6 +177,16 @@ gui::DropDownList::~DropDownList()
 	{
 		delete this->list[i];
 	}
+}
+
+const string gui::DropDownList::getActiveElementText() const
+{
+	return this->activeElement->getText();
+}
+
+const unsigned short& gui::DropDownList::getActiveElementId() const
+{
+	return this->activeElement->getId();
 }
 
 const bool gui::DropDownList::getKeyTime()
@@ -196,7 +221,7 @@ void gui::DropDownList::update(const Vector2f& mousePos, const float& dt)
 
 	if (this->showList)
 	{
-		for (auto& i : this->list)
+		for (auto &i : this->list)
 		{
 			i->update(mousePos);
 

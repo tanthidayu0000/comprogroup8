@@ -1,10 +1,10 @@
-#ifndef CREDITSSTATE_H
-#define CREDITSSTATE_H
+#ifndef CONTROLSTATE_H
+#define CONTROLSTATE_H
 
 #include "State.h"
 #include "Gui.h"
 
-class CreditsState :
+class ControlState :
     public State
 {
 private:
@@ -19,8 +19,8 @@ private:
     void initGui();
 
 public:
-    CreditsState(StateData* stateData);
-    virtual ~CreditsState();
+    ControlState(StateData* stateData);
+    virtual ~ControlState();
 
     void updateInput(const float& dt);
     void updateGui();

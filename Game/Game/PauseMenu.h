@@ -15,13 +15,17 @@ private:
 	map<string, gui::Button*> buttons;
 
 public:
-	PauseMenu(RenderWindow& window, Font& font);
+	PauseMenu(VideoMode& vm, Font& font);
 	virtual ~PauseMenu();
 
 	map<string, gui::Button*>& getButtons();
 
 	const bool isButtonPressed(const string key);
-	void addButton(const string key, float y, const string text);
+	void addButton(const string key,
+		const float y, 
+		const float width, const float height, 
+		const unsigned charSize, 
+		const string text);
 	void update(const Vector2f& mousePos);
 	void render(RenderTarget& target);
 };

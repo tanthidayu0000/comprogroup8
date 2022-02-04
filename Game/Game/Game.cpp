@@ -4,44 +4,31 @@
 void Game::initVariables()
 {
 	this->window = NULL;
-	this->fullscreen = false;
-	this->dt = 0;
+	this->dt = 0.f;
+}
+
+void Game::initGraphicsSettings()
+{
+	this->gfxSettings.loadFromFile("Config/graphics.ini");
 }
 
 void Game::initWindow()
 {
-	ifstream ifs("Config/window.ini");
-	this->videoModes = VideoMode::getFullscreenModes();
-
-	string title = "None";
-	VideoMode window_bounds = VideoMode::getDesktopMode();
-	bool fullscreen = false;
-	unsigned framrate_limit = 120;
-	bool vertical_sync_enabled = false;
-	unsigned antialiasing_level = 0;
-
-	if (ifs.is_open())
-	{
-		getline(ifs, title);
-		ifs >> window_bounds.width >> window_bounds.height;
-		ifs >> fullscreen;
-		ifs >> framrate_limit;
-		ifs >> vertical_sync_enabled;
-		ifs >> antialiasing_level;
-	}
-
-	ifs.close();
-
-	this->fullscreen = fullscreen;
-	this->windowSettings.antialiasingLevel = antialiasing_level;
-
-	if(this->fullscreen)
-		this->window = new RenderWindow(window_bounds, title, Style::Fullscreen | Style::Titlebar | Style::Close, windowSettings);
+	if(this->gfxSettings.fullscreen)
+		this->window = new RenderWindow(
+			this->gfxSettings.resolution, 
+			this->gfxSettings.title, 
+			Style::Fullscreen, 
+			this->gfxSettings.contextSettings);
 	else
-		this->window = new RenderWindow(window_bounds, title, Style::Titlebar | Style::Close, windowSettings);
+		this->window = new RenderWindow(
+			this->gfxSettings.resolution,
+			this->gfxSettings.title,
+			Style::Titlebar | Style::Close,
+			this->gfxSettings.contextSettings);
 
-	this->window->setFramerateLimit(framrate_limit);
-	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
+	this->window->setFramerateLimit(this->gfxSettings.frameRateLimit);
+	this->window->setVerticalSyncEnabled(this->gfxSettings.verticalSync);
 }
 
 void Game::initKeys()
@@ -64,15 +51,26 @@ void Game::initKeys()
 		cout << i.first << " " << i.second << "\n";
 }
 
+void Game::initStateData()
+{
+	this->stateData.window = this->window;
+	this->stateData.gfxSettings = &this->gfxSettings;
+	this->stateData.supportedKeys = &this->supportedKeys;
+	this->stateData.states = &this->states;
+}
+
 void Game::initStates()
 {
-	this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
+	this->states.push(new MainMenuState(&this->stateData));
 }
 
 Game::Game()
 {
+	this->initVariables();
+	this->initGraphicsSettings();
 	this->initWindow();
 	this->initKeys();
+	this->initStateData();
 	this->initStates();
 }
 
@@ -112,13 +110,16 @@ void Game::update()
 
 	if (!this->states.empty())
 	{
-		this->states.top()->update(this->dt);
-
-		if (this->states.top()->getQuit())
+		if (this->window->hasFocus())
 		{
-			this->states.top()->endState();
-			delete this->states.top();
-			this->states.pop();
+			this->states.top()->update(this->dt);
+
+			if (this->states.top()->getQuit())
+			{
+				this->states.top()->endState();
+				delete this->states.top();
+				this->states.pop();
+			}
 		}
 	}
 	else
