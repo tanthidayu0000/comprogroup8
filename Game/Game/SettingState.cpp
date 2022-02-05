@@ -67,7 +67,7 @@ void SettingState::initGui()
 	{
 		modes_str.push_back(to_string(i.width) + 'x' + to_string(i.height));
 	}
-	this->dropDownList["RESOLUTION"] = new gui::DropDownList(
+	this->dropDownList["4RESOLUTION"] = new gui::DropDownList(
 		gui::p2pX(30.2f, vm), gui::p2pY(44.3f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(2.3f, vm),
 		font, modes_str.data(), modes_str.size()
@@ -78,7 +78,7 @@ void SettingState::initGui()
 		fulls = { "ON", "OFF" };
 	else
 		fulls = { "OFF", "ON" };
-	this->dropDownList["FULLSCREEN"] = new gui::DropDownList(
+	this->dropDownList["1FULLSCREEN"] = new gui::DropDownList(
 		gui::p2pX(30.2f, vm), gui::p2pY(57.8f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(2.3f, vm),
 		font, fulls.data(), fulls.size()
@@ -89,7 +89,7 @@ void SettingState::initGui()
 		vsync = { "ON", "OFF" };
 	else
 		vsync = { "OFF", "ON" };
-	this->dropDownList["VSYNC"] = new gui::DropDownList(
+	this->dropDownList["2VSYNC"] = new gui::DropDownList(
 		gui::p2pX(30.2f, vm), gui::p2pY(72.f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(2.3f, vm),
 		font, vsync.data(), vsync.size()
@@ -100,7 +100,7 @@ void SettingState::initGui()
 		anti = { "ON", "OFF" };
 	else
 		anti = { "OFF", "ON" };
-	this->dropDownList["ANTI"] = new gui::DropDownList(
+	this->dropDownList["3ANTI"] = new gui::DropDownList(
 		gui::p2pX(30.2f, vm), gui::p2pY(85.7f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(2.3f, vm),
 		font, anti.data(), anti.size()
@@ -195,19 +195,19 @@ void SettingState::updateGui(const float& dt)
 
 	if (this->buttons["APPLY"]->isPressed())
 	{
-		this->stateData->gfxSettings->resolution = this->modes[this->dropDownList["RESOLUTION"]->getActiveElementId()];
+		this->stateData->gfxSettings->resolution = this->modes[this->dropDownList["4RESOLUTION"]->getActiveElementId()];
 
-		if (this->dropDownList["FULLSCREEN"]->getActiveElementText() == "ON")
+		if (this->dropDownList["1FULLSCREEN"]->getActiveElementText() == "ON")
 			this->stateData->gfxSettings->fullscreen = true;
 		else
 			this->stateData->gfxSettings->fullscreen = false;
 
-		if (this->dropDownList["VSYNC"]->getActiveElementText() == "ON")
+		if (this->dropDownList["2VSYNC"]->getActiveElementText() == "ON")
 			this->stateData->gfxSettings->verticalSync = true;
 		else
 			this->stateData->gfxSettings->verticalSync = false;
 
-		if (this->dropDownList["ANTI"]->getActiveElementText() == "ON")
+		if (this->dropDownList["3ANTI"]->getActiveElementText() == "ON")
 			this->stateData->gfxSettings->contextSettings.antialiasingLevel = true;
 		else
 			this->stateData->gfxSettings->contextSettings.antialiasingLevel = false;
