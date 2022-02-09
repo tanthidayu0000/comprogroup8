@@ -12,11 +12,13 @@ private:
     PauseMenu* pmenu;
 
     Player* player;
+    Enemy* enemy;
 
     void initKeybinds();
     void initFonts();
     void initPauseMenu();
     void initPlayers();
+    void initEnemy();
 
 public:
     GameState(StateData* stateData);
@@ -30,6 +32,5 @@ public:
     void render(RenderTarget* target = NULL);
 
 };
-
 
 #endif

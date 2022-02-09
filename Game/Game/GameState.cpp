@@ -40,6 +40,11 @@ void GameState::initPlayers()
 	this->player = new Player();
 }
 
+void GameState::initEnemy()
+{
+	this->enemy = new Enemy();
+}
+
 GameState::GameState(StateData* stateData)
 	: State(stateData)
 {
@@ -47,12 +52,14 @@ GameState::GameState(StateData* stateData)
 	this->initFonts();
 	this->initPauseMenu();
 	this->initPlayers();
+	this->initEnemy();
 }
 
 GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->player;
+	delete this->enemy;
 }
 
 void GameState::updateInput(const float& dt)
@@ -129,6 +136,7 @@ void GameState::update(const float& dt)
 		//this->updatePlayerInput(dt);
 
 		this->player->update();
+		this->enemy->update(this->window);
 		this->updateCollision();
 	}
 	else
@@ -144,6 +152,7 @@ void GameState::render(RenderTarget* target)
 		target = this->window;
 
 	this->player->render(this->window);
+	this->enemy->render(this->window);
 
 	if (this->paused)
 	{

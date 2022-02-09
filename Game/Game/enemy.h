@@ -1,31 +1,12 @@
+#ifndef ENEMY_H
+#define ENEMY_H
 
-#include<iostream>
-#include<vector>
-#include<ctime>
-
-#include<SFML/Graphics.hpp>
-#include<SFML/System.hpp>
-#include<SFML/Window.hpp>
-#include<SFML/Audio.hpp>
-#include<SFML/Network.hpp>
-
-/*
-    Class that acts as the game engine.
-    Wrapper class.
-*/
-
-class Game
+class Enemy
 {
 private:
-    //Variables
-    //Window
-    sf::RenderWindow* window;
-    sf::VideoMode videoMode;
-    sf::Event ev;
-
-    //Mouse positions
-    sf::Vector2i mousePosWindow;
-    sf::Vector2f mousePosView;
+    ////Mouse positions
+    /*Vector2i mousePosWindow;
+    Vector2f mousePosView;*/
 
     //Game logic
     int points;
@@ -34,34 +15,22 @@ private:
     int maxEnemies;
 
     //Game objects
-    std::vector<sf::RectangleShape> enemies;
-    sf::RectangleShape enemy;
+    vector<RectangleShape> enemies;
+    RectangleShape enemy;
 
     //Private functions
     void initVariables();
-    void initWindow();
     void initEnemies();
 public:
     //Constructors / Destructors
-    Game();
-    virtual ~Game();
-
-
-    //Accessors
-    const bool running() const;
+    Enemy();
+    virtual ~Enemy();
 
     //Functions
-    void spawnEnemy();
-    void pollvents();
-    void updateMousePositions();
-    void updateEnemies();
-    void update();
+    void spawnEnemy(RenderTarget* target);
+    //void updateMousePositions();
+    void update(RenderTarget* target);
+    void render(RenderTarget* target);
+};
 
-    void renderEnemies();
-    void render();
-
-
-    //Game objects
-    sf::RectangleShape enemy;
-}
-
+#endif

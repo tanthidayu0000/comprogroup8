@@ -2,6 +2,7 @@
 #define STATE_H
 
 #include "Player.h"
+#include "Enemy.h"
 #include "GraphicsSettings.h"
 
 class Player;
