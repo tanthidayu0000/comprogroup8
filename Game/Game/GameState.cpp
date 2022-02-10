@@ -1,6 +1,23 @@
 #include "includeAll.h"
 #include "GameState.h"
 
+void GameState::initVariables()
+{
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
+
+	this->background.setSize(
+		Vector2f(
+			static_cast<float>(vm.width),
+			static_cast<float>(vm.height)
+		)
+	);
+
+	if (!this->backgroundTexture.loadFromFile("Background/bgMap.png"))
+		throw "ERROR::GAME_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
+
+	this->background.setTexture(&this->backgroundTexture);
+}
+
 void GameState::initKeybinds()
 {
 	ifstream ifs("Config/gamestate_keybinds.ini");
@@ -35,9 +52,16 @@ void GameState::initPauseMenu()
 	this->pmenu->addButton("QUIT", gui::p2pY(54.6f, vm), gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm), gui::calcCharSize(vm), "Quit");
 }
 
+void GameState::initMap()
+{
+	this->map1 = new Map1();
+}
+
 void GameState::initPlayers()
 {
-	this->player = new Player();
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
+
+	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(92.6f, vm), gui::p2pX(0.125f, vm), gui::p2pY(0.22f, vm));
 }
 
 void GameState::initEnemy()
@@ -48,9 +72,11 @@ void GameState::initEnemy()
 GameState::GameState(StateData* stateData)
 	: State(stateData)
 {
+	this->initVariables();
 	this->initKeybinds();
 	this->initFonts();
 	this->initPauseMenu();
+	this->initMap();
 	this->initPlayers();
 	this->initEnemy();
 }
@@ -58,6 +84,7 @@ GameState::GameState(StateData* stateData)
 GameState::~GameState()
 {
 	delete this->pmenu;
+	delete this->map1;
 	delete this->player;
 	delete this->enemy;
 }
@@ -73,16 +100,18 @@ void GameState::updateInput(const float& dt)
 	}
 }
 
-//void GameState::updatePlayerInput(const float& dt)
+//void GameState::updatePlayerInput()
 //{
-//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
-//		//this->player->animState(MOVE_LEFT);
-//	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
-//		//this->player->animState(MOVE_RIGHT);
-//	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))));
-//		//this->player->animState(JUMPING);
-//	else if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))));
-//		//this->player->animState(FALLING);
+//	this->player->animationState(IDLE);
+//
+//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVING_LEFT"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
+//		this->player->animationState(MOVE_LEFT);
+//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVING_RIGHT"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
+//		this->player->animationState(MOVE_RIGHT);
+//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMP"))));
+//		this->player->animationState(JUMPING);
+//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALL"))));
+//		this->player->animationState(FALLING);
 //}
 
 void GameState::updateCollision()
@@ -133,8 +162,8 @@ void GameState::update(const float& dt)
 	
 	if (!this->paused)
 	{
-		//this->updatePlayerInput(dt);
-
+		//this->updatePlayerInput();
+		this->map1->update();
 		this->player->update();
 		this->enemy->update(this->window);
 		this->updateCollision();
@@ -151,8 +180,11 @@ void GameState::render(RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	this->player->render(this->window);
-	this->enemy->render(this->window);
+	target->draw(this->background);
+
+	this->map1->render(target);
+	this->player->render(target);
+	this->enemy->render(target);
 
 	if (this->paused)
 	{

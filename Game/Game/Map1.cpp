@@ -6,7 +6,6 @@ void Map1::initVariables()
 	ifstream openfile("Map1.txt");
 
 	this->loadCounter = Vector2i(0, 0);
-	this->Window = new RenderWindow(VideoMode(1920, 1080, 48), "Loading Maps[Easy]");
 
 	if (openfile.is_open())
 	{
@@ -39,57 +38,35 @@ void Map1::initVariables()
 
 Map1::Map1()
 {
-
+	this->initVariables();
 }
 
 Map1::~Map1()
 {
-	delete this->Window;
+	
 }
 
 void Map1::update()
 {
-	
-	
-	{
-		Event Event;
-		while (this->Window->pollEvent(Event))
-		{
-			switch (Event.type)
-			{
-			case::Event::Closed:
-				this->Window->close();
-				break;
-			}
-		}
-		
-	}
+
 }
 
-
-
-void Map1::render()
+void Map1::render(RenderTarget* target)
 {
-	while (this->Window->isOpen())
+	for (int i = 0; i < this->loadCounter.x; i++)
 	{
-		this->update();
-		this->Window->clear();
-
-		for (int i = 0; i < this->loadCounter.x; i++)
+		for (int j = 0; j < this->loadCounter.y; j++)
 		{
-			for (int j = 0; j < this->loadCounter.y; j++)
+			if (this->map[i][j].x != -1 && this->map[i][j].y != -1)
 			{
-				if (this->map[i][j].x != -1 && this->map[i][j].y != -1)
-				{
-					this->tiles.setPosition(i * 48, j * 48);
-					this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
-					this->Window->draw(this->tiles);
-				}
-
+				this->tiles.setPosition(i * 48, j * 48);
+				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
+				target->draw(this->tiles);
 			}
+
 		}
-		this->Window->display();
 	}
+
 }
 
 
