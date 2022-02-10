@@ -64,7 +64,7 @@ void PauseMenu::addButton(
 	this->buttons[key] = new gui::Button(
 		x, y, width, height,
 		&this->font, text, charSize,
-		Color(100, 100, 100, 200), Color(250, 250, 250, 250), Color(20, 20, 20, 50),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 }
 
