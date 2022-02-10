@@ -23,12 +23,12 @@ private:
 
     void initAnimState();
     void initTexture();
-    void initSprite();
+    void initSprite(float x, float y, float width, float height);
     void initAnimations();
     void initPhysics();
 
 public:
-    Player();
+    Player(float x, float y, float width, float height);
     virtual ~Player();
 
     const FloatRect getGlobalBounds() const;
