@@ -8,7 +8,7 @@ void SettingState::innitVariables()
 
 void SettingState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
 	{
 		throw("ERROR::MIANMENUSTATE::CLOUD NOT LOAD FONT");
 	}

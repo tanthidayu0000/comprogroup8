@@ -13,7 +13,7 @@ void CreditsState::initBackground()
 
 void CreditsState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
 	{
 		throw("ERROR::EDITORSTATE::CLOUD NOT LOAD FONT");
 	}

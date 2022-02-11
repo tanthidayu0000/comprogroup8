@@ -37,7 +37,7 @@ void GameState::initKeybinds()
 
 void GameState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
 	{
 		throw("ERROR::MIANMENUSTATE::CLOUD NOT LOAD FONT");
 	}
@@ -63,7 +63,7 @@ void GameState::initPlayers()
 {
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(70.4f, vm), gui::p2pX(2.5f, vm), gui::p2pY(4.4f, vm));
+	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(88.8f, vm), gui::p2pX(2.5f, vm), gui::p2pY(4.4f, vm));
 }
 
 void GameState::initEnemy()
