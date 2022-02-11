@@ -61,7 +61,7 @@ void GameState::initPlayers()
 {
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(92.6f, vm), gui::p2pX(0.125f, vm), gui::p2pY(0.22f, vm));
+	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(70.4f, vm), gui::p2pX(0.125f, vm), gui::p2pY(0.22f, vm));
 }
 
 void GameState::initEnemy()
@@ -116,13 +116,13 @@ void GameState::updateInput(const float& dt)
 
 void GameState::updateCollision()
 {
-	if (this->player->getGlobalBounds().top + this->player->getGlobalBounds().height > this->window->getSize().y)
+	if (this->player->getGlobalBounds().top + this->player->getGlobalBounds().height > this->map1->getPos())
 	{
 		this->player->resetVelocityY();
 		this->player->setPosition
 		(
 			this->player->getGlobalBounds().left,
-			this->window->getSize().y - this->player->getGlobalBounds().height
+			this->map1->getPos() - this->player->getGlobalBounds().height
 		);
 	}
 	if (this->player->getGlobalBounds().left + this->player->getGlobalBounds().width > this->window->getSize().x)

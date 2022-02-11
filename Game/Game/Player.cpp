@@ -21,7 +21,7 @@ void Player::initSprite(float x, float y, float width, float height)
 
 	this->sprite.setTextureRect(this->currentFrame);
 	this->sprite.setScale(1.5f, 1.5f);
-	this->sprite.setPosition(x, y);
+	//this->sprite.setPosition(x, y);
 }
 
 void Player::initAnimations()
@@ -112,14 +112,14 @@ void Player::updateMovement()
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::A) || Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
-		this->move(-5.f, 0.f);
+		this->move(-10.f, 0.f);
 		if (!onGround)
 			this->sprite.move(-5.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_LEFT;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
-		this->move(5.f, 0.f);
+		this->move(10.f, 0.f);
 		if (!onGround)
 			this->sprite.move(5.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_RIGHT;

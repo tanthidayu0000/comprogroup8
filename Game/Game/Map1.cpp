@@ -46,13 +46,22 @@ Map1::~Map1()
 	
 }
 
+const float Map1::getPos() const
+{
+	return this->collision.y;
+}
+
 void Map1::update()
 {
-
+	
 }
 
 void Map1::render(RenderTarget* target)
 {
+	/*for (auto& i : this->map1)
+	{
+		target->draw(i);
+	}*/
 	for (int i = 0; i < this->loadCounter.x; i++)
 	{
 		for (int j = 0; j < this->loadCounter.y; j++)
@@ -61,12 +70,13 @@ void Map1::render(RenderTarget* target)
 			{
 				this->tiles.setPosition(i * 48, j * 48);
 				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
+				if (this->tiles.getTextureRect().left == 240 && this->tiles.getTextureRect().top == 0)
+				{
+					this->collision.y = this->tiles.getPosition().y;
+				}
+				//this->map1.push_back(tiles);
 				target->draw(this->tiles);
 			}
-
 		}
 	}
-
 }
-
-
