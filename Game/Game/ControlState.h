@@ -9,8 +9,15 @@ class ControlState :
 {
 private:
     Font font;
+    Font symbol;
 
     map<string, gui::Button*> buttons;
+
+    Text control;
+    Text move;
+    Text or_;
+    Text pause;
+    Text puzzle;
 
     void innitVariables();
     void initBackground();
