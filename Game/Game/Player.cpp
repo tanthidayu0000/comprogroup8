@@ -16,12 +16,12 @@ void Player::initTexture()
 
 void Player::initSprite(float x, float y, float width, float height)
 {
-	this->sprite.setTexture(this->textureSheet);
+	this->sprite.setTexture(&this->textureSheet, true);
 	this->currentFrame = IntRect(0, 0, 32, 32);
 
 	this->sprite.setTextureRect(this->currentFrame);
-	this->sprite.setScale(1.5f, 1.5f);
-	//this->sprite.setPosition(x, y);
+	this->sprite.setSize(Vector2f(width, height));
+	this->sprite.setPosition(x, y);
 }
 
 void Player::initAnimations()

@@ -1,7 +1,7 @@
 #include "includeAll.h"
 #include "Map1.h"
 
-void Map1::initVariables()
+void Map1::initVariables(float width, float height)
 {
 	ifstream openfile("Map1.txt");
 
@@ -12,7 +12,8 @@ void Map1::initVariables()
 		string tileLocation;
 		openfile >> tileLocation;
 		this->tileTexture.loadFromFile(tileLocation);
-		this->tiles.setTexture(this->tileTexture);
+		this->tiles.setTexture(&this->tileTexture, true);
+		this->tiles.setSize(Vector2f(width, height));
 		while (!openfile.eof())
 		{
 			string str;
@@ -36,9 +37,9 @@ void Map1::initVariables()
 	}
 }
 
-Map1::Map1()
+Map1::Map1(float width, float height)
 {
-	this->initVariables();
+	this->initVariables(width, height);
 }
 
 Map1::~Map1()
@@ -56,7 +57,7 @@ void Map1::update()
 	
 }
 
-void Map1::render(RenderTarget* target)
+void Map1::render(RenderTarget* target, float width, float height)
 {
 	/*for (auto& i : this->map1)
 	{
@@ -68,7 +69,7 @@ void Map1::render(RenderTarget* target)
 		{
 			if (this->map[i][j].x != -1 && this->map[i][j].y != -1)
 			{
-				this->tiles.setPosition(i * 48, j * 48);
+				this->tiles.setPosition(i * width, j * height);
 				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
 				if (this->tiles.getTextureRect().left == 240 && this->tiles.getTextureRect().top == 0)
 				{

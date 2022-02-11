@@ -6,7 +6,7 @@ enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVE_LEFT, MOVE_RIGHT, JUMPING, FALLING
 class Player
 {
 private:
-    Sprite sprite;
+    RectangleShape sprite;
     Texture textureSheet;
     Clock animationTimer;
 

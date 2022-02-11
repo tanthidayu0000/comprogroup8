@@ -54,14 +54,16 @@ void GameState::initPauseMenu()
 
 void GameState::initMap()
 {
-	this->map1 = new Map1();
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
+
+	this->map1 = new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm));
 }
 
 void GameState::initPlayers()
 {
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(70.4f, vm), gui::p2pX(0.125f, vm), gui::p2pY(0.22f, vm));
+	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(70.4f, vm), gui::p2pX(2.5f, vm), gui::p2pY(4.4f, vm));
 }
 
 void GameState::initEnemy()
@@ -177,12 +179,14 @@ void GameState::update(const float& dt)
 
 void GameState::render(RenderTarget* target)
 {
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
+
 	if (!target)
 		target = this->window;
 
 	target->draw(this->background);
 
-	this->map1->render(target);
+	this->map1->render(target, gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm));
 	this->player->render(target);
 	this->enemy->render(target);
 
