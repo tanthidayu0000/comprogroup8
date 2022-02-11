@@ -27,9 +27,9 @@ public:
     virtual ~Enemy();
 
     //Functions
-    void spawnEnemy(RenderTarget* target);
+    void spawnEnemy(const VideoMode& vm);
     //void updateMousePositions();
-    void update(RenderTarget* target);
+    void update(const VideoMode& vm);
     void render(RenderTarget* target);
 };
 
