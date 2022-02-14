@@ -127,4 +127,14 @@ void GameState::render(RenderTarget* target)
 	{
 		this->pmenu->render(*target);
 	}
+
+	/*Text mouseText;
+	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 25);
+	mouseText.setFont(this->font);
+	mouseText.setCharacterSize(24);
+	stringstream ss;
+	ss << this->mousePosView.x << " , " << this->mousePosView.y;
+	mouseText.setString(ss.str());
+
+	target->draw(mouseText);*/
 }

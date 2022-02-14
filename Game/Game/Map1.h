@@ -11,7 +11,6 @@ class Map1
 		VideoMode vm;
 		Texture tileTexture;
 		RectangleShape tiles;
-		//vector<RectangleShape> map1;
 
 		Vector2i map[100][100];
 		Vector2i loadCounter;

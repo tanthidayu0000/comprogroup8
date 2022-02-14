@@ -52,14 +52,24 @@ Player::~Player()
 
 }
 
-const FloatRect Player::getGlobalBounds() const
+const Vector2f Player::getGlobalBounds() const
 {
-	return this->sprite.getGlobalBounds();
+	return this->sprite.getSize();
 }
 
 void Player::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
+}
+
+bool Player::on_Ground()
+{
+	return this->onGround;
+}
+
+const Vector2f Player::getPos()
+{
+	return this->sprite.getPosition();
 }
 
 void Player::resetVelocityY()
