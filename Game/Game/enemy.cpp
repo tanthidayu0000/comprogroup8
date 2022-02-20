@@ -35,7 +35,7 @@ Enemy::~Enemy()
 }
 
 // Functions
-void Enemy::spawnEnemy(RenderTarget* target)
+void Enemy::spawnEnemy(const VideoMode& vm)
 {
     /*
         @return void
@@ -47,8 +47,8 @@ void Enemy::spawnEnemy(RenderTarget* target)
     */
 
    this->enemy.setPosition(
-       static_cast<float>(rand() % static_cast<int>(target->getSize().x - this->enemy.getSize().x)),
-       static_cast<float>(rand() % static_cast<int>(target->getSize().y - this->enemy.getSize().y))
+       static_cast<float>(rand() % static_cast<int>(vm.width - this->enemy.getSize().x)),
+       static_cast<float>(rand() % static_cast<int>(vm.height - this->enemy.getSize().y))
    );
    
    this->enemy.setFillColor(Color::Green);
@@ -70,7 +70,7 @@ void Enemy::spawnEnemy(RenderTarget* target)
 //   this->mousePosView = this->window->mapPixelToCoords(this->mousePosView);
 //}
 
-void Enemy::update(RenderTarget* target)
+void Enemy::update(const VideoMode& vm)
 {
     /**
         @return void
@@ -87,7 +87,7 @@ void Enemy::update(RenderTarget* target)
         if(this->enemySpawnTimer >= this->enemySpawnTImerMax)
         {
             //Spawn the enemy and reset the timer
-            this->spawnEnemy(target);
+            this->spawnEnemy(vm);
             this->enemySpawnTimer = 0.f;
         }
         else
@@ -114,7 +114,7 @@ void Enemy::update(RenderTarget* target)
         //}
 
         //If the enemy is past the bottom of the screen
-        if(this->enemies[i].getPosition().y > target->getSize().y)
+        if(this->enemies[i].getPosition().y > vm.height)
         {
             deleted = true;
         }

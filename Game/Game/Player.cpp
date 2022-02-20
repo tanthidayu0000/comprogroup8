@@ -16,11 +16,11 @@ void Player::initTexture()
 
 void Player::initSprite(float x, float y, float width, float height)
 {
-	this->sprite.setTexture(this->textureSheet);
+	this->sprite.setTexture(&this->textureSheet, true);
 	this->currentFrame = IntRect(0, 0, 32, 32);
 
 	this->sprite.setTextureRect(this->currentFrame);
-	this->sprite.setScale(1.5f, 1.5f);
+	this->sprite.setSize(Vector2f(width, height));
 	this->sprite.setPosition(x, y);
 }
 
@@ -52,14 +52,24 @@ Player::~Player()
 
 }
 
-const FloatRect Player::getGlobalBounds() const
+const Vector2f Player::getGlobalBounds() const
 {
-	return this->sprite.getGlobalBounds();
+	return this->sprite.getSize();
 }
 
 void Player::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
+}
+
+bool Player::on_Ground()
+{
+	return this->onGround;
+}
+
+const Vector2f Player::getPos()
+{
+	return this->sprite.getPosition();
 }
 
 void Player::resetVelocityY()
@@ -112,14 +122,14 @@ void Player::updateMovement()
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::A) || Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
-		this->move(-5.f, 0.f);
+		this->move(-10.f, 0.f);
 		if (!onGround)
 			this->sprite.move(-5.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_LEFT;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
-		this->move(5.f, 0.f);
+		this->move(10.f, 0.f);
 		if (!onGround)
 			this->sprite.move(5.f, 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_RIGHT;

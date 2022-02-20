@@ -6,7 +6,7 @@ enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVE_LEFT, MOVE_RIGHT, JUMPING, FALLING
 class Player
 {
 private:
-    Sprite sprite;
+    RectangleShape sprite;
     Texture textureSheet;
     Clock animationTimer;
 
@@ -31,7 +31,10 @@ public:
     Player(float x, float y, float width, float height);
     virtual ~Player();
 
-    const FloatRect getGlobalBounds() const;
+    const Vector2f getGlobalBounds() const;
+
+    bool on_Ground();
+    const Vector2f getPos();
 
     void setPosition(const float x, const float y);
     void resetVelocityY();

@@ -37,7 +37,7 @@ void GameState::initKeybinds()
 
 void GameState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/DM Weekend Regular.ttf"))
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
 	{
 		throw("ERROR::MIANMENUSTATE::CLOUD NOT LOAD FONT");
 	}
@@ -54,19 +54,9 @@ void GameState::initPauseMenu()
 
 void GameState::initMap()
 {
-	this->map1 = new Map1();
-}
-
-void GameState::initPlayers()
-{
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->player = new Player(gui::p2pX(0.f, vm), gui::p2pY(92.6f, vm), gui::p2pX(0.125f, vm), gui::p2pY(0.22f, vm));
-}
-
-void GameState::initEnemy()
-{
-	this->enemy = new Enemy();
+	this->map1 = new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm);
 }
 
 GameState::GameState(StateData* stateData)
@@ -77,16 +67,12 @@ GameState::GameState(StateData* stateData)
 	this->initFonts();
 	this->initPauseMenu();
 	this->initMap();
-	this->initPlayers();
-	this->initEnemy();
 }
 
 GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->map1;
-	delete this->player;
-	delete this->enemy;
 }
 
 void GameState::updateInput(const float& dt)
@@ -97,51 +83,6 @@ void GameState::updateInput(const float& dt)
 			this->pauseState();
 		else
 			this->unpauseState();
-	}
-}
-
-//void GameState::updatePlayerInput()
-//{
-//	this->player->animationState(IDLE);
-//
-//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVING_LEFT"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_LEFT"))));
-//		this->player->animationState(MOVE_LEFT);
-//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVING_RIGHT"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))));
-//		this->player->animationState(MOVE_RIGHT);
-//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMPING"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("JUMP"))));
-//		this->player->animationState(JUMPING);
-//	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALLING"))) || Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("FALL"))));
-//		this->player->animationState(FALLING);
-//}
-
-void GameState::updateCollision()
-{
-	if (this->player->getGlobalBounds().top + this->player->getGlobalBounds().height > this->window->getSize().y)
-	{
-		this->player->resetVelocityY();
-		this->player->setPosition
-		(
-			this->player->getGlobalBounds().left,
-			this->window->getSize().y - this->player->getGlobalBounds().height
-		);
-	}
-	if (this->player->getGlobalBounds().left + this->player->getGlobalBounds().width > this->window->getSize().x)
-	{
-		this->player->resetVelocityX();
-		this->player->setPosition
-		(
-			this->window->getSize().x - this->player->getGlobalBounds().width,
-			this->player->getGlobalBounds().top
-		);
-	}
-	if (this->player->getGlobalBounds().left + this->player->getGlobalBounds().width < this->player->getGlobalBounds().width)
-	{
-		this->player->resetVelocityX();
-		this->player->setPosition
-		(
-			0.f,
-			this->player->getGlobalBounds().top
-		);
 	}
 }
 
@@ -162,11 +103,7 @@ void GameState::update(const float& dt)
 	
 	if (!this->paused)
 	{
-		//this->updatePlayerInput();
 		this->map1->update();
-		this->player->update();
-		this->enemy->update(this->window);
-		this->updateCollision();
 	}
 	else
 	{
@@ -177,17 +114,27 @@ void GameState::update(const float& dt)
 
 void GameState::render(RenderTarget* target)
 {
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
+
 	if (!target)
 		target = this->window;
 
 	target->draw(this->background);
 
-	this->map1->render(target);
-	this->player->render(target);
-	this->enemy->render(target);
+	this->map1->render(target, gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm));
 
 	if (this->paused)
 	{
 		this->pmenu->render(*target);
 	}
+
+	/*Text mouseText;
+	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 25);
+	mouseText.setFont(this->font);
+	mouseText.setCharacterSize(24);
+	stringstream ss;
+	ss << this->mousePosView.x << " , " << this->mousePosView.y;
+	mouseText.setString(ss.str());
+
+	target->draw(mouseText);*/
 }

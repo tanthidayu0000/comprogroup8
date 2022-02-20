@@ -7,7 +7,7 @@ GraphicsSettings::GraphicsSettings()
 	this->resolution = VideoMode::getDesktopMode();
 	this->fullscreen = false;
 	this->verticalSync = false;
-	this->frameRateLimit = 50;
+	this->frameRateLimit = 120;
 	this->contextSettings.antialiasingLevel = 0;
 	this->videoModes = VideoMode::getFullscreenModes();
 }

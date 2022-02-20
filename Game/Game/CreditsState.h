@@ -12,6 +12,13 @@ private:
 
     map<string, gui::Button*> buttons;
 
+    Text credit;
+    Text name1;
+    Text name2;
+    Text name3;
+    Text name4;
+
+
     void innitVariables();
     void initBackground();
     void initFonts();
