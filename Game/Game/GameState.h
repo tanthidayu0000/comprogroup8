@@ -3,19 +3,18 @@
 
 #include "State.h"
 #include "Map1.h"
+#include "Map2.h"
+#include "Map3.h"
 #include "PauseMenu.h"
 
 class GameState :
     public State
 {
 private:
-    Texture backgroundTexture;
-    RectangleShape background;
-
     Font font;
     PauseMenu* pmenu;
 
-    Map1* map1;
+    stack<Map*> maps;
 
     void initVariables();
     void initKeybinds();

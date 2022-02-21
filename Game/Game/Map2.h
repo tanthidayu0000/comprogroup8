@@ -1,20 +1,44 @@
-#pragma once
-class Map2
+#ifndef MAP2_H
+#define MAP2_H
+
+#include "Map.h"
+#include "Gui.h"
+#include "Player.h"
+#include "Enemy.h"
+
+class Map2 :
+	public Map
 {
 private:
+	RectangleShape background;
+
 	Texture tileTexture;
-	Sprite tiles;
+	RectangleShape tiles;
 
 	Vector2i map[100][100];
 	Vector2i loadCounter;
-	RenderWindow* Window;
+
+	Vector2f ground;
+	vector<float> brickX;
+	vector<float> brickY;
+
+	Player* player;
+	Enemy* enemy;
 
 	void initVariables();
+	void initPlayers();
+	void initEnemy();
+
 public:
-	Map2();
+	Map2(float width, float height, const VideoMode& vm);
 	virtual ~Map2();
+
+	void updateChangeMap();
+
+	void updateCollision();
 	void update();
-	void render();
+	void render(RenderTarget* target);
 
 };
 
+#endif

@@ -14,7 +14,6 @@ public:
 	GraphicsSettings* gfxSettings;
 	map<string, int>* supportedKeys;
 	stack<State*>* states;
-
 };
 
 class State
@@ -37,7 +36,7 @@ protected:
 	Vector2i mousePosWindow;
 	Vector2f mousePosView;
 
-	map<string, Texture> textures;
+	//map<string, Texture> textures;
 
 	virtual void initKeybinds() = 0;
 

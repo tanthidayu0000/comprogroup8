@@ -75,6 +75,15 @@
     <ClCompile Include="Map1.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="Map2.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map3.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
@@ -117,6 +126,15 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Map1.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map2.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map3.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
       <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>

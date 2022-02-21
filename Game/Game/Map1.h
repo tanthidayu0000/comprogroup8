@@ -1,38 +1,40 @@
 #ifndef MAP1_H
 #define MAP1_H
 
+#include "Map.h"
 #include "Gui.h"
 #include "Player.h"
-#include "Enemy.h"
 
-class Map1
+class Map1 :
+	public Map
 {
-	private:
-		VideoMode vm;
-		Texture tileTexture;
-		RectangleShape tiles;
+private:
+	RectangleShape background;
 
-		Vector2i map[100][100];
-		Vector2i loadCounter;
+	Texture tileTexture;
+	RectangleShape tiles;
 
-		Vector2f ground;
-		vector<float> brickX;
-		vector<float> brickY;
+	Vector2i map[100][100];
+	Vector2i loadCounter;
 
-		Player* player;
-		Enemy* enemy;
+	Vector2f ground;
+	vector<float> brickX;
+	vector<float> brickY;
 
-		void initVariables(float width, float height);
-		void initPlayers();
-		void initEnemy();
+	Player* player;
 
-	public:
-		Map1(float width, float height, const VideoMode& vm);
-		virtual ~Map1();
+	void initVariables();
+	void initPlayers();
 
-		void updateCollision();
-		void update();
-		void render(RenderTarget* target, float width, float height);
+public:
+	Map1(float width, float height, const VideoMode& vm);
+	virtual ~Map1();
+
+	void updateChangeMap();
+
+	void updateCollision();
+	void update();
+	void render(RenderTarget* target);
 };
 
 #endif
