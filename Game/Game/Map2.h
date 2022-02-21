@@ -35,6 +35,8 @@ public:
 
 	void updateChangeMap();
 
+	void updateDeath();
+
 	void updateCollision();
 	void update();
 	void render(RenderTarget* target);

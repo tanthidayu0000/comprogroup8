@@ -33,6 +33,8 @@ public:
 	Map3(float width, float height, const VideoMode& vm);
 	virtual ~Map3();
 
+	void updateDeath();
+
 	void updateCollision();
 	void update();
 	void render(RenderTarget* target);

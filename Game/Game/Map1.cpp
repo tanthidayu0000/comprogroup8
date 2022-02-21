@@ -92,19 +92,6 @@ void Map1::updateCollision()
 				this->brickY[j] - this->player->getGlobalBounds().y
 			);
 		}
-
-		if (this->player->getPos().y == this->brickY[j] + gui::p2pY(4.45f, this->vm) &&
-			this->player->getPos().x + this->player->getGlobalBounds().x > this->brickX[i] + gui::p2pX(1.f, this->vm) &&
-			this->player->getPos().x + this->player->getGlobalBounds().x < this->brickX[i + 1] + gui::p2pX(2.5f, this->vm) + this->player->getGlobalBounds().x / 2
-			)
-		{
-			this->player->resetVelocityY();
-			this->player->setPosition
-			(
-				this->player->getPos().x,
-				this->ground.y - this->player->getGlobalBounds().y
-			);
-		}
 	}
 
 	if (this->player->getPos().y + this->player->getGlobalBounds().y > this->ground.y)
