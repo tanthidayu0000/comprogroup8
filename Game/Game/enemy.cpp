@@ -2,36 +2,49 @@
 #include "Enemy.h"
 
 //Private functions
-void Enemy::initVariables()
+void Enemy::initVariables(const float time)
 {
     //Game logic
     this->points = 0;
-    this->enemySpawnTImerMax = 200.f;
+    this->enemySpawnTImerMax = time;
     this->enemySpawnTimer = this->enemySpawnTImerMax;
     this->maxEnemies = 10;
 }
 
-void Enemy::initEnemies()
+void Enemy::initEnemies(float width, float height)
 {
+    if (!this->textureSheet.loadFromFile("Sprites/Enemy/Enemy1.png"))
+    {
+        cout << "ERROR::ENEMY::Cloud not load the enemy sheet!";
+    }
+
     this->enemy.setPosition(10.f, 10.f);
-    this->enemy.setSize(Vector2f(100.f, 100.f));
-    this->enemy.setScale(Vector2f(0.5f, 0.5f));
-    this->enemy.setFillColor(Color::Cyan);
-    //this->enemy.setOutlineColor(Color::Green);
-    //this->enemy.setOutlineThickness(1.f);
+    this->enemy.setSize(Vector2f(width, height));
+    this->enemy.setTexture(&this->textureSheet);
+    this->enemy.setTextureRect(IntRect(64, 0, 64, 192));
 }
 
 //Constructors / Destructors
 
-Enemy::Enemy()
+Enemy::Enemy(const float time, float width, float height)
 {
-    this->initVariables();
-    this->initEnemies();
+    this->initVariables(time);
+    this->initEnemies(width, height);
 }
 
 Enemy::~Enemy()
 {
 
+}
+
+const Vector2f Enemy::getGlobalBounds() const
+{
+    return this->enemy.getSize();;
+}
+
+const Vector2f Enemy::getPos()
+{
+    return this->position;
 }
 
 // Functions
@@ -48,10 +61,11 @@ void Enemy::spawnEnemy(const VideoMode& vm)
 
    this->enemy.setPosition(
        static_cast<float>(rand() % static_cast<int>(vm.width - this->enemy.getSize().x)),
-       static_cast<float>(rand() % static_cast<int>(vm.height - this->enemy.getSize().y))
+       static_cast<float>(rand() % static_cast<int>(vm.height / 2 - this->enemy.getSize().y))
    );
    
-   this->enemy.setFillColor(Color::Green);
+   this->enemy.setTexture(&this->textureSheet);
+   this->enemy.setTextureRect(IntRect(64, 0, 64, 192));
 
     //Spawn the enemy
    this->enemies.push_back(this->enemy);
@@ -112,6 +126,8 @@ void Enemy::update(const VideoMode& vm)
         //        this->points += 10.f;
         //    }
         //}
+
+        this->position = this->enemies[i].getPosition();
 
         //If the enemy is past the bottom of the screen
         if(this->enemies[i].getPosition().y > vm.height)

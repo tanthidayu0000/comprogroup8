@@ -14,17 +14,23 @@ private:
     float enemySpawnTImerMax;
     int maxEnemies;
 
+    Vector2f position;
+
     //Game objects
+    Texture textureSheet;
     vector<RectangleShape> enemies;
     RectangleShape enemy;
 
     //Private functions
-    void initVariables();
-    void initEnemies();
+    void initVariables(const float time);
+    void initEnemies(float width, float height);
 public:
     //Constructors / Destructors
-    Enemy();
+    Enemy(const float time, float width, float height);
     virtual ~Enemy();
+
+    const Vector2f getGlobalBounds() const;
+    const Vector2f getPos();
 
     //Functions
     void spawnEnemy(const VideoMode& vm);
