@@ -3,19 +3,7 @@
 
 void GameState::initVariables()
 {
-	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->background.setSize(
-		Vector2f(
-			static_cast<float>(vm.width),
-			static_cast<float>(vm.height)
-		)
-	);
-
-	if (!this->backgroundTexture.loadFromFile("Background/bgMap.png"))
-		throw "ERROR::GAME_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
-
-	this->background.setTexture(&this->backgroundTexture);
 }
 
 void GameState::initKeybinds()
@@ -56,7 +44,9 @@ void GameState::initMap()
 {
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
-	this->map1 = new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm);
+	this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 }
 
 GameState::GameState(StateData* stateData)
@@ -72,7 +62,11 @@ GameState::GameState(StateData* stateData)
 GameState::~GameState()
 {
 	delete this->pmenu;
-	delete this->map1;
+	while (!this->maps.empty())
+	{
+		delete this->maps.top();
+		this->maps.pop();
+	}
 }
 
 void GameState::updateInput(const float& dt)
@@ -103,7 +97,20 @@ void GameState::update(const float& dt)
 	
 	if (!this->paused)
 	{
-		this->map1->update();
+		if (!this->maps.empty())
+		{
+			if (this->window->hasFocus())
+			{
+				this->maps.top()->update();
+
+				if (this->maps.top()->getChangeMap())
+				{
+					this->maps.top()->endState();
+					delete this->maps.top();
+					this->maps.pop();
+				}
+			}
+		}
 	}
 	else
 	{
@@ -119,9 +126,8 @@ void GameState::render(RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	target->draw(this->background);
-
-	this->map1->render(target, gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm));
+	if (!this->maps.empty())
+		this->maps.top()->render(target);
 
 	if (this->paused)
 	{

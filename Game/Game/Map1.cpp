@@ -1,12 +1,20 @@
 #include "includeAll.h"
 #include "Map1.h"
 
-void Map1::initVariables(float width, float height)
+void Map1::initVariables()
 {
+	this->background.setSize(
+		Vector2f(
+			static_cast<float>(this->vm.width),
+			static_cast<float>(this->vm.height)
+		)
+	);
+	this->background.setFillColor(Color::Black);
+
 	this->brickX.insert(this->brickX.begin(), 0);
 	this->brickY.insert(this->brickY.begin(), 0);
 
-	ifstream openfile("Map1.txt");
+	ifstream openfile("Map/Map1.txt");
 
 	this->loadCounter = Vector2i(0, 0);
 
@@ -16,7 +24,7 @@ void Map1::initVariables(float width, float height)
 		openfile >> tileLocation;
 		this->tileTexture.loadFromFile(tileLocation);
 		this->tiles.setTexture(&this->tileTexture, true);
-		this->tiles.setSize(Vector2f(width, height));
+		this->tiles.setSize(Vector2f(this->width, this->height));
 		while (!openfile.eof())
 		{
 			string str;
@@ -42,26 +50,29 @@ void Map1::initVariables(float width, float height)
 
 void Map1::initPlayers()
 {
-	this->player = new Player(gui::p2pX(0.f, this->vm), gui::p2pY(88.8f, this->vm), gui::p2pX(2.5f, this->vm), gui::p2pY(4.45f, this->vm));
-}
-
-void Map1::initEnemy()
-{
-	this->enemy = new Enemy();
+	this->player = new Player(this->vm);
 }
 
 Map1::Map1(float width, float height, const VideoMode& vm)
+	: Map(width, height, vm)
 {
-	this->vm = vm;
-	this->initVariables(width, height);
+	this->initVariables();
 	this->initPlayers();
-	this->initEnemy();
 }
 
 Map1::~Map1()
 {
 	delete this->player;
-	delete this->enemy;
+}
+
+void Map1::updateChangeMap()
+{
+	if (this->player->getPos().x >= gui::p2pX(97.5f, this->vm) &&
+		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
+		Keyboard::isKeyPressed(Keyboard::Key::Enter))
+	{
+		this->endState();
+	}
 }
 
 void Map1::updateCollision()
@@ -82,19 +93,7 @@ void Map1::updateCollision()
 			);
 		}
 	}
-	/*else if (this->player->getPos().y + this->player->getGlobalBounds().y < this->brickY[2] + gui::p2pY(2.5f, this->vm) &&
-		this->player->getPos().y + this->player->getGlobalBounds().y > this->brickY[2] &&
-		this->player->getPos().x + this->player->getGlobalBounds().x > this->brickX[2] + this->player->getGlobalBounds().x / gui::p2pX(0.2f, this->vm) &&
-		this->player->getPos().x + this->player->getGlobalBounds().x < this->brickX[3] - this->player->getGlobalBounds().x / gui::p2pX(0.2f, this->vm)
-		)
-	{
-		this->player->resetVelocityY();
-		this->player->setPosition
-		(
-			this->player->getPos().x,
-			this->brickY[2] - this->player->getGlobalBounds().y
-		);
-	}*/
+
 	if (this->player->getPos().y + this->player->getGlobalBounds().y > this->ground.y)
 	{
 		this->player->resetVelocityY();
@@ -126,13 +125,16 @@ void Map1::updateCollision()
 
 void Map1::update()
 {
-	this->player->update();
-	this->enemy->update(this->vm);
+	this->player->update(this->vm);
 	this->updateCollision();
+
+	this->updateChangeMap();
 }
 
-void Map1::render(RenderTarget* target, float width, float height)
+void Map1::render(RenderTarget* target)
 {
+	target->draw(this->background);
+
 	int k = 0, a = 0;
 	float check1 = 0, count = 2, check2 = 0;
 	for (int j = 0; j < this->loadCounter.y; j++)
@@ -141,9 +143,9 @@ void Map1::render(RenderTarget* target, float width, float height)
 		{
 			if (this->map[i][j].x != -1 && this->map[i][j].y != -1)
 			{
-				if (i * width > 1920) continue;
+				if (i * width > gui::p2pX(100.f, this->vm)) continue;
 				check2++;
-				this->tiles.setPosition(i * width, j * height);
+				this->tiles.setPosition(i * this->width, j * this->height);
 				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
 				if (this->tiles.getTextureRect().left == 240 && this->tiles.getTextureRect().top == 0)
 				{
@@ -206,5 +208,4 @@ void Map1::render(RenderTarget* target, float width, float height)
 	}
 
 	this->player->render(target);
-	this->enemy->render(target);
 }

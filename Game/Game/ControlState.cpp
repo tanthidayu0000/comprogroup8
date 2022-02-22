@@ -159,7 +159,7 @@ void ControlState::initGui()
 	this->puzzle.setPosition(Vector2f(gui::p2pX(25.f, vm), gui::p2pY(80.f, vm)));
 	this->puzzle.setCharacterSize(gui::calcCharSize(vm));
 	this->puzzle.setFillColor(Color(255, 255, 255, 200));
-	this->puzzle.setString("Open Box");
+	this->puzzle.setString("Open Box / Door");
 
 	this->buttons["ENTER"] = new gui::Button(
 		gui::p2pX(42.f, vm), gui::p2pY(80.f, vm),
