@@ -14,14 +14,14 @@ void Player::initTexture()
 	}
 }
 
-void Player::initSprite(float x, float y, float width, float height)
+void Player::initSprite(const VideoMode& vm)
 {
 	this->sprite.setTexture(&this->textureSheet, true);
 	this->currentFrame = IntRect(0, 0, 32, 32);
 
 	this->sprite.setTextureRect(this->currentFrame);
-	this->sprite.setSize(Vector2f(width, height));
-	this->sprite.setPosition(x, y);
+	this->sprite.setSize(Vector2f(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm)));
+	this->sprite.setPosition(gui::p2pX(0.f, vm), gui::p2pY(88.8f, vm));
 }
 
 void Player::initAnimations()
@@ -38,11 +38,11 @@ void Player::initPhysics()
 	this->gravity = 4.f;
 }
 
-Player::Player(float x, float y, float width, float height)
+Player::Player(const VideoMode& vm)
 {
 	this->initAnimState();
 	this->initTexture();
-	this->initSprite(x, y, width, height);
+	this->initSprite(vm);
 	this->initAnimations();
 	this->initPhysics();
 }
@@ -50,6 +50,11 @@ Player::Player(float x, float y, float width, float height)
 Player::~Player()
 {
 
+}
+
+const Vector2f Player::getVelocity()
+{
+	return this->velocity;
 }
 
 const Vector2f Player::getGlobalBounds() const
@@ -60,11 +65,6 @@ const Vector2f Player::getGlobalBounds() const
 void Player::setPosition(const float x, const float y)
 {
 	this->sprite.setPosition(x, y);
-}
-
-bool Player::on_Ground()
-{
-	return this->onGround;
 }
 
 const Vector2f Player::getPos()
@@ -111,7 +111,7 @@ void Player::updatePhysics()
 	this->sprite.move(this->velocity);
 }
 
-void Player::updateMovement()
+void Player::updateMovement(const VideoMode& vm)
 {
 	this->animState = PLAYER_ANIMATION_STATES::IDLE;
 
@@ -122,27 +122,27 @@ void Player::updateMovement()
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::A) || Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
-		this->move(-10.f, 0.f);
+		this->move(-gui::p2pX(0.5f, vm), 0.f);
 		if (!onGround)
-			this->sprite.move(-5.f, 0.f);
+			this->sprite.move(-gui::p2pX(0.3f, vm), 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_LEFT;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
-		this->move(10.f, 0.f);
+		this->move(gui::p2pX(0.5f, vm), 0.f);
 		if (!onGround)
-			this->sprite.move(5.f, 0.f);
+			this->sprite.move(gui::p2pX(0.3f, vm), 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_RIGHT;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::W) || Keyboard::isKeyPressed(Keyboard::Key::Up))
 	{
 		if (this->currentFrame.top == 0.f)
 		{
-			this->sprite.move(0.f, -30.f);
+			this->sprite.move(0.f, -gui::p2pY(2.7f, vm));
 		}
 		else if (this->currentFrame.top == 32.f)
 		{
-			this->sprite.move(0.f, -30.f);
+			this->sprite.move(0.f, -gui::p2pY(2.7f, vm));
 		}
 
 		this->animState = PLAYER_ANIMATION_STATES::JUMPING;
@@ -242,9 +242,9 @@ void Player::updateAnimations()
 	}
 }
 
-void Player::update()
+void Player::update(const VideoMode& vm)
 {
-	this->updateMovement();
+	this->updateMovement(vm);
 	this->updateAnimations();
 	this->updatePhysics();
 }

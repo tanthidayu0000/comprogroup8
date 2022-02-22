@@ -50,7 +50,7 @@ void Map1::initVariables()
 
 void Map1::initPlayers()
 {
-	this->player = new Player(gui::p2pX(0.f, this->vm), gui::p2pY(88.8f, this->vm), gui::p2pX(2.5f, this->vm), gui::p2pY(4.45f, this->vm));
+	this->player = new Player(this->vm);
 }
 
 Map1::Map1(float width, float height, const VideoMode& vm)
@@ -125,7 +125,7 @@ void Map1::updateCollision()
 
 void Map1::update()
 {
-	this->player->update();
+	this->player->update(this->vm);
 	this->updateCollision();
 
 	this->updateChangeMap();

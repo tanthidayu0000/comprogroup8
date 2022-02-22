@@ -50,7 +50,7 @@ void Map2::initVariables()
 
 void Map2::initPlayers()
 {
-	this->player = new Player(gui::p2pX(0.f, this->vm), gui::p2pY(88.8f, this->vm), gui::p2pX(2.5f, this->vm), gui::p2pY(4.45f, this->vm));
+	this->player = new Player(this->vm);
 }
 
 void Map2::initEnemy()
@@ -148,7 +148,7 @@ void Map2::updateCollision()
 
 void Map2::update()
 {
-	this->player->update();
+	this->player->update(this->vm);
 	this->enemy->update(this->vm);
 	this->updateCollision();
 

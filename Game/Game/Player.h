@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Gui.h"
+
 enum PLAYER_ANIMATION_STATES { IDLE = 0, MOVE_LEFT, MOVE_RIGHT, JUMPING, FALLING };
 
 class Player
@@ -23,17 +25,16 @@ private:
 
     void initAnimState();
     void initTexture();
-    void initSprite(float x, float y, float width, float height);
+    void initSprite(const VideoMode& vm);
     void initAnimations();
     void initPhysics();
 
 public:
-    Player(float x, float y, float width, float height);
+    Player(const VideoMode& vm);
     virtual ~Player();
 
+    const Vector2f getVelocity();
     const Vector2f getGlobalBounds() const;
-
-    bool on_Ground();
     const Vector2f getPos();
 
     void setPosition(const float x, const float y);
@@ -42,9 +43,9 @@ public:
 
     void move(const float dir_x, const float dir_y);
     void updatePhysics();
-    void updateMovement();
+    void updateMovement(const VideoMode& vm);
     void updateAnimations();
-    void update();
+    void update(const VideoMode& vm);
     void render(RenderTarget* target);
 };
 
