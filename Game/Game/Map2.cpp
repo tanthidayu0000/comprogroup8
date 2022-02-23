@@ -83,6 +83,15 @@ void Map2::initBox()
 	this->box = new Box(gui::p2pX(95.f, this->vm), gui::p2pY(44.45f, this->vm), this->vm);
 }
 
+void Map2::initheart()
+{
+	for(int i = 0; i < 3; i++)
+	{
+		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
+
+	}
+}
+
 Map2::Map2(float width, float height, const VideoMode& vm)
 	: Map(width, height, vm)
 {
@@ -90,6 +99,7 @@ Map2::Map2(float width, float height, const VideoMode& vm)
 	this->initPlayers();
 	this->initEnemy();
 	this->initBox();
+	this->initheart();
 }
 
 Map2::~Map2()
@@ -134,8 +144,20 @@ void Map2::updateDeath()
 		else 
 		{
 			this->damage += 1;
-			
 		}
+	}
+}
+
+int Map2::getdamage()
+{
+	return this->damage;
+}
+
+void Map2::updateHeart()
+{
+	if (this->damage > 0)
+	{
+		this->heart.pop_back();
 	}
 }
 
@@ -222,6 +244,7 @@ void Map2::update(Vector2f mouseposview)
 	this->enemy->update(this->vm);
 	this->updateCollision();
 	this->updateCoin();
+	this->updateHeart();
 
 	for (int i = 0; i < this->coins.size(); i++)
 	{
@@ -334,13 +357,17 @@ void Map2::render(RenderTarget* target)
 	this->player->render(target);
 	this->enemy->render(target);
 	if(this->showtext)
+	{
+		target->draw(this->text);
+		this->time += 1.f;
+		if (this->time >= 100.f)
 		{
-			target->draw(this->text);
-			this->time += 1.f;
-			if (this->time >= 100.f)
-			{
-				this->showtext = false;
-				this->time = 0.f;
-			}
+			this->showtext = false;
+			this->time = 0.f;
 		}
+	}
+	for (int i = 0; i < this->heart.size(); i++)
+	{
+		this->heart[i]->render(target);
+	}	
 }

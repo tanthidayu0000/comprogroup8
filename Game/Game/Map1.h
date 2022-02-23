@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Box.h"
 #include "Coin.h"
+#include "heart.h"
 
 class Map1 :
 	public Map
@@ -27,6 +28,7 @@ private:
 	Player* player;
 	Box* box;
 	vector<Coin*> coins;
+	vector<Heart*> heart;
 
 	Text text;
 	Font font;
@@ -38,11 +40,15 @@ private:
 	void initPlayers();
 	void initBox();
 
+	void initheart();
+	
 public:
 	Map1(float width, float height, const VideoMode& vm);
 	virtual ~Map1();
 
 	void updateChangeMap();
+
+	int getdamage();
 
 	void updateCoin();
 	void updateCollision();

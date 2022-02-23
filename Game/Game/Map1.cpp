@@ -78,12 +78,22 @@ void Map1::initBox()
 	this->box = new Box(gui::p2pX(90.f, this->vm), gui::p2pY(8.8f, this->vm), this->vm);
 }
 
+void Map1::initheart()
+{
+	for(int i = 0; i < 3; i++)
+	{
+		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
+
+	}
+}
+
 Map1::Map1(float width, float height, const VideoMode& vm)
 	: Map(width, height, vm)
 {
 	this->initVariables();
 	this->initPlayers();
 	this->initBox();
+	this->initheart();
 }
 
 Map1::~Map1()
@@ -105,6 +115,11 @@ void Map1::updateChangeMap()
 		else
 			this->showtext = true;
 	}
+}
+
+int Map1::getdamage()
+{
+	return this->damage;
 }
 
 void Map1::updateCoin()
@@ -295,14 +310,18 @@ void Map1::render(RenderTarget* target)
 	this->box->render(target);
 	this->player->render(target);
 	
-		if(this->showtext)
+	if(this->showtext)
+	{
+		target->draw(this->text);
+		this->time += 1.f;
+		if (this->time >= 100.f)
 		{
-			target->draw(this->text);
-			this->time += 1.f;
-			if (this->time >= 100.f)
-			{
-				this->showtext = false;
-				this->time = 0.f;
-			}
+			this->showtext = false;
+			this->time = 0.f;
 		}
+	}
+	for (int i = 0; i < this->heart.size(); i++)
+	{
+		this->heart[i]->render(target);
+	}	
 }

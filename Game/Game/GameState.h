@@ -7,7 +7,7 @@
 #include "Map3.h"
 #include "PauseMenu.h"
 #include "Playagainstate.h"
-#include "heart.h"
+
 
 class GameState :
     public State
@@ -18,7 +18,6 @@ private:
 
     stack<Map*> maps;
 
-    vector<Heart*> heart;
 
     void initVariables();
     void initKeybinds();
@@ -26,13 +25,12 @@ private:
     void initPauseMenu();
     void initMap();
 
-    void initHeart();
+
 
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
 
-    void updateHeart();
     void updateInput(const float& dt);
     void updatePauseMenuButtons();
     void update(const float& dt);

@@ -51,15 +51,7 @@ void GameState::initMap()
 	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 }
 
-void GameState::initHeart()
-{
-	const VideoMode& vm = this->stateData->gfxSettings->resolution;
-	for(int i = 0; i < 3; i++)
-	{
-		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), vm), gui::p2pY(4.45f*(i+1), vm), vm));
 
-	}
-}
 
 GameState::GameState(StateData* stateData)
 	: State(stateData)
@@ -69,7 +61,6 @@ GameState::GameState(StateData* stateData)
 	this->initFonts();
 	this->initPauseMenu();
 	this->initMap();
-	this->initHeart();
 }
 
 GameState::~GameState()
@@ -82,13 +73,6 @@ GameState::~GameState()
 	}
 }
 
-void GameState::updateHeart()
-{
-	if (this->maps.top()->getdamage() > 0)
-	{
-		this->heart.pop_back();
-	}
-}
 
 void GameState::updateInput(const float& dt)
 {
@@ -115,7 +99,6 @@ void GameState::update(const float& dt)
 	this->updateMousePosition();
 	this->updateKeyTime(dt);
 	this->updateInput(dt);
-	this->updateHeart();
 	
 	if (!this->paused)
 	{
@@ -158,11 +141,6 @@ void GameState::render(RenderTarget* target)
 	else
 		this->endState();
 
-	for (int i = 0; i < this->heart.size(); i++)
-	{
-		this->heart[i]->render(target);
-	}
-	
 
 	if (this->paused)
 	{
