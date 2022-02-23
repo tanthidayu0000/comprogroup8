@@ -80,7 +80,8 @@ void Map1::updateChangeMap()
 		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
 		Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
-		this->endState();
+		if(this->coins.empty())
+			this->endState();
 	}
 }
 
