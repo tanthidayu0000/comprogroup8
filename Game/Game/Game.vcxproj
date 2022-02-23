@@ -24,6 +24,7 @@
     <ProjectGuid>{e124e036-9479-42d2-8369-8e775916e758}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName />
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -162,6 +163,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="fifteen-Puzzle.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="Gui.cpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Playagainstate.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="puzzle.h" />
     <ClInclude Include="SettingState.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>
