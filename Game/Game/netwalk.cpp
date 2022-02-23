@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "puzzle.h"
+#include "includeAll.h"
 using namespace sf;
 
 const int N = 6;
