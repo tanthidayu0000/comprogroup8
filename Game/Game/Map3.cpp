@@ -109,6 +109,21 @@ void Map3::updateCoin()
 		else break;
 	}
 	this->count++;
+
+	for (int i = 0; i < this->coins.size(); i++)
+	{
+		if 
+			(
+			this->player->getPos().y + this->player->getGlobalBounds().y / 2 >= this->coins[i]->getPos().y &&
+			this->player->getPos().y + this->player->getGlobalBounds().y / 2 <= this->coins[i]->getPos().y + gui::p2pY(4.45f, this->vm) &&
+			this->player->getPos().x + this->player->getGlobalBounds().x / 2 >= this->coins[i]->getPos().x &&
+			this->player->getPos().x + this->player->getGlobalBounds().x / 2 <= this->coins[i]->getPos().x + gui::p2pX(2.5f, this->vm)
+			)
+		{
+			delete this->coins[i];
+		}
+	}
+	
 }
 
 void Map3::updateCollision()
