@@ -186,6 +186,8 @@
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Map3.cpp" />
+    <ClCompile Include="minesweeper.cpp" />
+    <ClCompile Include="netwalk.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Playagainstate.cpp" />
     <ClCompile Include="Player.cpp" />
