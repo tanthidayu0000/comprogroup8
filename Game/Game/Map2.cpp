@@ -3,6 +3,7 @@
 
 void Map2::initVariables()
 {
+	this->damage = 0;
 	this->time = 0.f;
 	this->showtext = false;
 
@@ -121,11 +122,20 @@ void Map2::updateDeath()
 		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(3.5f, this->vm)
 		)
 	{
-		this->player->setPosition
-		(
-			gui::p2pX(0.f, this->vm),
-			gui::p2pY(88.8f, this->vm)
-		);
+		if (this->damage == 3)
+		{
+			this->player->setPosition
+			(
+				gui::p2pX(0.f, this->vm),
+				gui::p2pY(88.8f, this->vm)
+			);
+			this->damage = 0;
+		}
+		else 
+		{
+			this->damage += 1;
+			
+		}
 	}
 }
 

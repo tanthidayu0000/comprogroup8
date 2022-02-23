@@ -14,11 +14,15 @@ protected:
 	bool restart;
 	bool changeMap;
 
+	int damage;
+
 public:
 	Map(float width, float height, const VideoMode& vm);
 	virtual ~Map();
 
 	const bool& getChangeMap() const;
+
+	int getdamage();
 
 	const bool updaterestart();
 	void endState();

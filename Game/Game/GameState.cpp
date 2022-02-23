@@ -84,7 +84,10 @@ GameState::~GameState()
 
 void GameState::updateHeart()
 {
-	if ()
+	if (this->maps.top()->getdamage() > 0)
+	{
+		this->heart.pop_back();
+	}
 }
 
 void GameState::updateInput(const float& dt)

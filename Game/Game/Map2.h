@@ -35,7 +35,7 @@ private:
 	int count;
 	float time;
 
-	
+
 	void initVariables();
 	void initPlayers();
 	void initEnemy();
@@ -47,6 +47,7 @@ public:
 
 	void updateChangeMap();
 
+	void updatedamage();
 	void updateDeath();
 
 	void updateCoin();
