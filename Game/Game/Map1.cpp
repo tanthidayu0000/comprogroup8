@@ -3,6 +3,8 @@
 
 void Map1::initVariables()
 {
+	this->c_time.restart();
+
 	this->showtext = false;
 	this->count = 0;
 
@@ -208,9 +210,13 @@ void Map1::update()
 
 void Map1::render(RenderTarget* target)
 {
-	if (this->showtext)
+	if (this->c_time.getElapsedTime().asSeconds() >= 0.1f)
 	{
-		target->draw(this->text);
+		if(this->showtext)
+		{
+			target->draw(this->text);
+			this->c_time.restart();
+		}
 	}
 	
 	target->draw(this->background);

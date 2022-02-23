@@ -30,7 +30,7 @@ private:
 	Text text;
 	Font font;
 	bool showtext;
-	
+	Clock c_time;
 	int count;
 
 	void initVariables();
