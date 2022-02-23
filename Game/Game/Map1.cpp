@@ -5,6 +5,17 @@ void Map1::initVariables()
 {
 	this->count = 0;
 
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
+	{
+		throw("ERROR::MAP1::CLOUD NOT LOAD FONT");
+	}
+
+	this->text.setFont(this->font);
+	this->text.setColor(Color::White);
+	this->text.setOutlineColor(Color::Black);
+	this->text.setOutlineThickness(1);
+	this->text.setString("You must pick up all coins and open box.");
+
 	this->background.setSize(
 		Vector2f(
 			static_cast<float>(this->vm.width),
@@ -82,6 +93,7 @@ void Map1::updateChangeMap()
 	{
 		if(this->coins.empty() && this->box->openbox()) 
 			this->endState();
+
 	}
 }
 
@@ -189,6 +201,14 @@ void Map1::update()
 
 void Map1::render(RenderTarget* target)
 {
+	if (this->player->getPos().x >= gui::p2pX(97.5f, this->vm) &&
+		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
+		Keyboard::isKeyPressed(Keyboard::Key::Enter))
+	{
+		if(!this->coins.empty() && !this->box->openbox()) 
+			target->draw(this->text);
+	}
+
 	target->draw(this->background);
 
 	int k = 0, a = 0;
