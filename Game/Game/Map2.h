@@ -35,6 +35,7 @@ private:
 	int count;
 	float time;
 
+	
 	void initVariables();
 	void initPlayers();
 	void initEnemy();
