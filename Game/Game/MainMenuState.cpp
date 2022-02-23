@@ -61,7 +61,21 @@ void MainMenuState::initGui()
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
-	this->buttons["SETTING_STATE"] = new gui::Button(
+	this->buttons["CREDITS_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(76.9f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Credits", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	this->buttons["EXIT_STATE"] = new gui::Button(
+		gui::p2pX(44.8f, vm), gui::p2pY(84.3f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
+		&this->font, "Quit", gui::calcCharSize(vm),
+		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
+		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+
+	/*this->buttons["SETTING_STATE"] = new gui::Button(
 		gui::p2pX(44.8f, vm), gui::p2pY(76.9f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
 		&this->font, "Setting", gui::calcCharSize(vm),
@@ -80,7 +94,7 @@ void MainMenuState::initGui()
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
 		&this->font, "Quit", gui::calcCharSize(vm),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
-		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
+		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));*/
 }
 
 MainMenuState::MainMenuState(StateData* stateData)
@@ -123,11 +137,11 @@ void MainMenuState::updateGui()
 		this->states->push(new ControlState(this->stateData));
 	}
 
-	if (this->buttons["SETTING_STATE"]->isPressed())
+	/*if (this->buttons["SETTING_STATE"]->isPressed())
 	{
 		this->states->pop();
 		this->states->push(new SettingState(this->stateData));
-	}
+	}*/
 
 	if (this->buttons["CREDITS_STATE"]->isPressed())
 	{
