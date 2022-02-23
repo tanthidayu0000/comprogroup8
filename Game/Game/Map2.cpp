@@ -5,6 +5,7 @@ void Map2::initVariables()
 {
 	this->damage = 0;
 	this->time = 0.f;
+	this->dtime = 0.f;
 	this->showtext = false;
 
 	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
@@ -145,6 +146,7 @@ void Map2::updateDeath()
 		{
 			this->damage += 1;
 		}
+		this->dtime += 1.f;
 	}
 }
 
@@ -155,9 +157,10 @@ int Map2::getdamage()
 
 void Map2::updateHeart()
 {
-	if (this->damage > 0)
+	if (this->damage > 0 && this->dtime >= 50.f)
 	{
 		this->heart.pop_back();
+		this->dtime = 0.f;
 	}
 }
 

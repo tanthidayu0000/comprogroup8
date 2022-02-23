@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "Box.h"
 #include "Coin.h"
+#include "heart.h"
 
 class Map3 :
 	public Map
@@ -29,6 +30,7 @@ private:
 	Enemy* enemy;
 	Box* box;
 	vector<Coin*> coins;
+	vector<Heart*> heart;
 
 	int count;
 
@@ -37,10 +39,13 @@ private:
 	bool showtext;
 	float time;
 
+	float dtime;
+
 	void initVariables();
 	void initPlayers();
 	void initEnemy();
 	void initBox();
+	void initheart();
 
 public:
 	Map3(float width, float height, const VideoMode& vm);
@@ -49,6 +54,10 @@ public:
 	void updateDeath();
 
 	void updatePlayagain();
+
+	int getdamage();
+
+	void updateHeart();
 
 	void updateCoin();
 	void updateCollision();

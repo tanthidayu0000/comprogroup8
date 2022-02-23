@@ -4,6 +4,7 @@
 void Map3::initVariables()
 {
 	this->time = 0.f;
+	this->dtime = 0.f;
 	this->showtext = false;
 	this->count = 0;
 
@@ -83,6 +84,15 @@ void Map3::initBox()
 	this->box = new Box(gui::p2pX(82.5f, this->vm), gui::p2pY(53.33f, this->vm), this->vm);
 }
 
+void Map3::initheart()
+{
+	for(int i = 0; i < 3; i++)
+	{
+		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
+
+	}
+}
+
 Map3::Map3(float width, float height, const VideoMode& vm)
 	: Map(width, height, vm)
 {
@@ -90,6 +100,7 @@ Map3::Map3(float width, float height, const VideoMode& vm)
 	this->initPlayers();
 	this->initEnemy();
 	this->initBox();
+	this->initheart();
 }
 
 Map3::~Map3()
@@ -107,11 +118,20 @@ void Map3::updateDeath()
 		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(3.5f, this->vm)
 		)
 	{
-		this->player->setPosition
-		(
-			gui::p2pX(0.f, this->vm),
-			gui::p2pY(88.8f, this->vm)
-		);
+		if (this->damage == 3)
+		{
+			this->player->setPosition
+			(
+				gui::p2pX(0.f, this->vm),
+				gui::p2pY(88.8f, this->vm)
+			);
+			this->damage = 0;
+		}
+		else 
+		{
+			this->damage += 1;
+		}
+		this->dtime += 1.f;
 	}
 }
 
@@ -127,6 +147,20 @@ void Map3::updatePlayagain()
 		}
 		else
 			this->showtext = true;
+	}
+}
+
+int Map3::getdamage()
+{
+	return this->damage;
+}
+
+void Map3::updateHeart()
+{
+	if (this->damage > 0 && this->dtime >= 50.f)
+	{
+		this->heart.pop_back();
+		this->dtime = 0.f;
 	}
 }
 
@@ -214,6 +248,7 @@ void Map3::update(Vector2f mouseposview)
 	this->enemy->update(this->vm);
 	this->updateCollision();
 	this->updateCoin();
+	this->updateHeart();
 
 	for (int i = 0; i < this->coins.size(); i++)
 	{
@@ -337,6 +372,10 @@ void Map3::render(RenderTarget* target)
 			this->time = 0.f;
 		}
 	}
+	for (int i = 0; i < this->heart.size(); i++)
+	{
+		this->heart[i]->render(target);
+	}	
 }
 
 

@@ -27,8 +27,6 @@ public:
 	const bool updaterestart();
 	void endState();
 
-	virtual int getdamage() = 0;
-
 	virtual void update(Vector2f mouseposview) = 0;
 	virtual void render(RenderTarget* target) = 0;
 };
