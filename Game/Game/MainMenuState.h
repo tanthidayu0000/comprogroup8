@@ -14,10 +14,11 @@ private:
     Texture backgroundTexture;
     RectangleShape background;
     Font font;
+    Text topic;
 
     map<string, gui::Button*> buttons;
 
-    void innitVariables();
+    void initVariables();
     void initFonts();
     void initKeybinds();
     void initGui();

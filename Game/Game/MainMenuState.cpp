@@ -1,14 +1,21 @@
 #include "includeAll.h"
 #include "MainMenuState.h"
 
-void MainMenuState::innitVariables()
+void MainMenuState::initVariables()
 {
+	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
+	this->topic.setFont(this->font);
+	this->topic.setCharacterSize(gui::calcCharSize(vm, 20));
+	this->topic.setFillColor(Color(255, 255, 255, 200));
+	this->topic.setString("MYSTERY WORLD");
+	this->topic.setOrigin(this->topic.getGlobalBounds().width / 2, this->topic.getGlobalBounds().height / 2);
+	this->topic.setPosition(Vector2f(gui::p2pX(50.f, vm), gui::p2pY(30.f, vm)));
 }
 
 void MainMenuState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
+	if (!this->font.loadFromFile("Fonts/light.ttf"))
 	{
 		throw("ERROR::MAINMENUSTATE::CLOUD NOT LOAD FONT");
 	}
@@ -42,7 +49,7 @@ void MainMenuState::initGui()
 		)
 	);
 
-	if (!this->backgroundTexture.loadFromFile("Background/MainMenu.jpeg"))
+	if (!this->backgroundTexture.loadFromFile("Background/wall.jpg"))
 		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
 
 	this->background.setTexture(&this->backgroundTexture);
@@ -50,28 +57,28 @@ void MainMenuState::initGui()
 	this->buttons["GAME_STATE"] = new gui::Button(
 		gui::p2pX(44.8f, vm), gui::p2pY(62.f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Start", gui::calcCharSize(vm),
+		&this->font, "Start", gui::calcCharSize(vm,70),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["CONTROL_STATE"] = new gui::Button(
 		gui::p2pX(44.8f, vm), gui::p2pY(69.4f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Control", gui::calcCharSize(vm),
+		&this->font, "Control", gui::calcCharSize(vm,70),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["CREDITS_STATE"] = new gui::Button(
 		gui::p2pX(44.8f, vm), gui::p2pY(76.9f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Credits", gui::calcCharSize(vm),
+		&this->font, "Credits", gui::calcCharSize(vm,70),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["EXIT_STATE"] = new gui::Button(
 		gui::p2pX(44.8f, vm), gui::p2pY(84.3f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Quit", gui::calcCharSize(vm),
+		&this->font, "Quit", gui::calcCharSize(vm,70),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
@@ -100,8 +107,8 @@ void MainMenuState::initGui()
 MainMenuState::MainMenuState(StateData* stateData)
 	: State(stateData)
 {
-	this->innitVariables();
 	this->initFonts();
+	this->initVariables();
 	this->initKeybinds();
 	this->initGui();
 }
@@ -177,6 +184,7 @@ void MainMenuState::render(RenderTarget* target)
 		target = this->window;
 
 	target->draw(this->background);
+	target->draw(this->topic);
 
 	this->renderGui(*target);
 

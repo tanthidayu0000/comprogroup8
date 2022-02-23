@@ -7,14 +7,14 @@ void Playagain::initGui()
 		gui::p2pX(25.f,this-> vm), gui::p2pY(60.f, this->vm),
 		gui::p2pX(10.4f, this->vm), gui::p2pY(7.4f, this->vm),
 		&this->font, "YES", gui::calcCharSize(this->vm,40),
-		Color(Color::White), Color(Color::Red), Color(20, 20, 20, 50),
+		Color(Color(255, 153, 0)), Color(Color::Red), Color(20, 20, 20, 50),
 		Color(0,0,0,0), Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 
 	this->buttons["QUIT"] = new gui::Button(
 		gui::p2pX(65.f, this->vm), gui::p2pY(60.f, this->vm),
 		gui::p2pX(10.4f, this->vm), gui::p2pY(7.4f, this->vm),
 		&this->font, "NO", gui::calcCharSize(this->vm,40),
-		Color(Color::White), Color(Color::Red), Color(20, 20, 20, 50),
+		Color(Color(255, 153, 0)), Color(Color::Red), Color(20, 20, 20, 50),
 		Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0));
 }
 
@@ -35,8 +35,8 @@ Playagain::Playagain(float width, float height, const VideoMode& vm)
 	
 	}
 	menu.setFont(font);
-	menu.setCharacterSize(150);
-	menu.setFillColor(Color::Magenta);
+	menu.setCharacterSize(gui::calcCharSize(vm, 20));
+	menu.setFillColor(Color(255,153,0));
 	menu.setString("PLAY AGAIN ?");
 	menu.setOrigin(menu.getLocalBounds().width / 2, menu.getLocalBounds().height / 2);
 	menu.setPosition(Vector2f(width / 2, height / 3));

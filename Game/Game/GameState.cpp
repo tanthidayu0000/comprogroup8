@@ -46,8 +46,8 @@ void GameState::initMap()
 
 	this->maps.push(new Playagain(vm.width, vm.height, vm));
 
-	this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
-	this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	//this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	//this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 }
 
@@ -73,7 +73,7 @@ GameState::~GameState()
 
 void GameState::updateInput(const float& dt)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("PAUSE"))) && this->getKeytime())
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->keybinds.at("PAUSE"))) && this->getKeytime() && this->maps.size() !=  1)
 	{
 		if (!this->paused)
 			this->pauseState();
