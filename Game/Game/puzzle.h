@@ -4,5 +4,7 @@ class Puzzle
 {
 public:
 	int puzzle1();
+	int puzzle2();
+	int puzzle3();
 	};
 #endif

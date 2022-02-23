@@ -102,6 +102,12 @@
     <ClCompile Include="fifteen-Puzzle.cpp">
       <Filter>puzzles</Filter>
     </ClCompile>
+    <ClCompile Include="netwalk.cpp">
+      <Filter>puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="minesweeper.cpp">
+      <Filter>puzzles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
