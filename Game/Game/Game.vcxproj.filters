@@ -28,6 +28,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{290383d7-7a1e-426e-a2e3-9526ee26589a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{ee267717-577b-46a1-aba0-f4441941247b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,7 +88,7 @@
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +144,7 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Header Files</Filter>
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
