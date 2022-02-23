@@ -86,7 +86,7 @@ void Map2::initBox()
 
 void Map2::initheart()
 {
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
 
@@ -127,13 +127,14 @@ void Map2::updateChangeMap()
 
 void Map2::updateDeath()
 {
+	this->dtime += 1.f;
 	if (this->player->getPos().x + this->player->getGlobalBounds().x > this->enemy->getPos().x + gui::p2pX(1.5f, this->vm) &&
 		this->player->getPos().x < this->enemy->getPos().x  + this->enemy->getGlobalBounds().x - gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().y > this->enemy->getPos().y + this->enemy->getGlobalBounds().y / 3 &&
 		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(3.5f, this->vm)
 		)
 	{
-		if (this->damage == 3)
+		if (this->damage == 5)
 		{
 			this->player->setPosition
 			(
@@ -146,7 +147,6 @@ void Map2::updateDeath()
 		{
 			this->damage += 1;
 		}
-		this->dtime += 1.f;
 	}
 }
 
@@ -247,8 +247,7 @@ void Map2::update(Vector2f mouseposview)
 	this->enemy->update(this->vm);
 	this->updateCollision();
 	this->updateCoin();
-	this->updateHeart();
-
+	
 	for (int i = 0; i < this->coins.size(); i++)
 	{
 		this->coins[i]->update();
@@ -265,7 +264,7 @@ void Map2::update(Vector2f mouseposview)
 	}
 
 	this->updateDeath();
-
+	this->updateHeart();
 	this->updateChangeMap();
 }
 

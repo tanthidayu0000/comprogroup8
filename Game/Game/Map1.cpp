@@ -80,7 +80,7 @@ void Map1::initBox()
 
 void Map1::initheart()
 {
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
 
