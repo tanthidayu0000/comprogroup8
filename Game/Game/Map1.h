@@ -29,6 +29,7 @@ private:
 
 	Text text;
 	Font font;
+	bool showtext;
 	
 	int count;
 

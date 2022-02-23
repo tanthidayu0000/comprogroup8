@@ -3,6 +3,7 @@
 
 void Map1::initVariables()
 {
+	this->showtext = false;
 	this->count = 0;
 
 	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
@@ -94,8 +95,12 @@ void Map1::updateChangeMap()
 		Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
 		if(this->coins.empty() && this->box->openbox()) 
+		{
+			this->showtext = false;
 			this->endState();
-
+		}
+		else
+			this->showtext = true;
 	}
 }
 
@@ -203,14 +208,11 @@ void Map1::update()
 
 void Map1::render(RenderTarget* target)
 {
-	if (this->player->getPos().x >= gui::p2pX(97.5f, this->vm) &&
-		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
-		Keyboard::isKeyPressed(Keyboard::Key::Enter))
+	if (this->showtext)
 	{
-		if(!this->coins.empty() && !this->box->openbox()) 
-			target->draw(this->text);
+		target->draw(this->text);
 	}
-
+	
 	target->draw(this->background);
 
 	int k = 0, a = 0;
