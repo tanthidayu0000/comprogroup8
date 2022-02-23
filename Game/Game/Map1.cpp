@@ -3,7 +3,6 @@
 
 void Map1::initVariables()
 {
-	this->c_time.restart();
 
 	this->showtext = false;
 	this->count = 0;
@@ -15,7 +14,7 @@ void Map1::initVariables()
 	
 	this->text.setCharacterSize(20);
 	this->text.setFont(this->font);
-	this->text.setColor(Color::White);
+	this->text.setFillColor(Color::White);
 	this->text.setOutlineColor(Color::Black);
 	this->text.setOutlineThickness(1);
 	this->text.setString("You must pick up all coins and open box.");
@@ -98,7 +97,6 @@ void Map1::updateChangeMap()
 	{
 		if(this->coins.empty() && this->box->openbox()) 
 		{
-			this->showtext = false;
 			this->endState();
 		}
 		else
@@ -210,14 +208,7 @@ void Map1::update()
 
 void Map1::render(RenderTarget* target)
 {
-	if (this->c_time.getElapsedTime().asSeconds() >= 0.1f)
-	{
-		if(this->showtext)
-		{
-			target->draw(this->text);
-			this->c_time.restart();
-		}
-	}
+	
 	
 	target->draw(this->background);
 
@@ -300,4 +291,10 @@ void Map1::render(RenderTarget* target)
 
 	this->box->render(target);
 	this->player->render(target);
+	
+		if(this->showtext)
+		{
+			target->draw(this->text);
+			this->showtext = false;
+		}
 }

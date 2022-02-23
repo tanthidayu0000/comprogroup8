@@ -29,6 +29,9 @@ private:
 	Box* box;
 	vector<Coin*> coins;
 
+	Text text;
+	Font font;
+	bool showtext;
 	int count;
 
 	void initVariables();

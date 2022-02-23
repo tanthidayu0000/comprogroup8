@@ -3,6 +3,21 @@
 
 void Map2::initVariables()
 {
+	this->showtext = false;
+
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
+	{
+		throw("ERROR::MAP2::CLOUD NOT LOAD FONT");
+	}
+
+	this->text.setCharacterSize(20);
+	this->text.setFont(this->font);
+	this->text.setFillColor(Color::White);
+	this->text.setOutlineColor(Color::Black);
+	this->text.setOutlineThickness(1);
+	this->text.setString("You must pick up all coins and open box.");
+	this->text.setPosition(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
+
 	this->count = 0;
 
 	this->background.setSize(
@@ -88,7 +103,11 @@ void Map2::updateChangeMap()
 		Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
 		if(this->coins.empty() && this->box->openbox()) 
+		{
 			this->endState();
+		}
+		else
+			this->showtext = true;
 	}
 }
 
@@ -302,4 +321,9 @@ void Map2::render(RenderTarget* target)
 	this->box->render(target);
 	this->player->render(target);
 	this->enemy->render(target);
+	if(this->showtext)
+		{
+			target->draw(this->text);
+			this->showtext = false;
+		}
 }
