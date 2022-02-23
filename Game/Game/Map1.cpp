@@ -10,6 +10,7 @@ void Map1::initVariables()
 		throw("ERROR::MAP1::CLOUD NOT LOAD FONT");
 	}
 
+	this->text.setCharacterSize(20);
 	this->text.setFont(this->font);
 	this->text.setColor(Color::White);
 	this->text.setOutlineColor(Color::Black);
