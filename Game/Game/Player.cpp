@@ -29,13 +29,13 @@ void Player::initAnimations()
 	this->animationTimer.restart();
 }
 
-void Player::initPhysics()
+void Player::initPhysics(const VideoMode& vm)
 {
-	this->velocityMax = 2.5f;
+	this->velocityMax = gui::p2pX(0.13f, vm);
 	this->velocityMin = 1.f;
-	this->acceleration = 2.f;
+	this->acceleration = gui::p2pY(0.1f, vm);
 	this->drag = 0.93f;
-	this->gravity = 4.f;
+	this->gravity = gui::p2pY(0.37f, vm);
 }
 
 Player::Player(const VideoMode& vm)
@@ -44,7 +44,7 @@ Player::Player(const VideoMode& vm)
 	this->initTexture();
 	this->initSprite(vm);
 	this->initAnimations();
-	this->initPhysics();
+	this->initPhysics(vm);
 }
 
 Player::~Player()
@@ -122,14 +122,14 @@ void Player::updateMovement(const VideoMode& vm)
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::A) || Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
-		this->move(-gui::p2pX(0.5f, vm), 0.f);
+		this->sprite.move(-gui::p2pX(0.2f, vm), 0.f);
 		if (!onGround)
 			this->sprite.move(-gui::p2pX(0.3f, vm), 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_LEFT;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
+	else if (Keyboard::isKeyPressed(Keyboard::Key::D) || Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
-		this->move(gui::p2pX(0.5f, vm), 0.f);
+		this->sprite.move(gui::p2pX(0.2f, vm), 0.f);
 		if (!onGround)
 			this->sprite.move(gui::p2pX(0.3f, vm), 0.f);
 		this->animState = PLAYER_ANIMATION_STATES::MOVE_RIGHT;

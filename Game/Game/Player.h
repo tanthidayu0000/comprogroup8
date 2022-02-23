@@ -27,7 +27,7 @@ private:
     void initTexture();
     void initSprite(const VideoMode& vm);
     void initAnimations();
-    void initPhysics();
+    void initPhysics(const VideoMode& vm);
 
 public:
     Player(const VideoMode& vm);
