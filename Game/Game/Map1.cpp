@@ -107,7 +107,7 @@ void Map1::updateCoin()
 			this->player->getPos().x + this->player->getGlobalBounds().x / 2 <= this->coins[i]->getPos().x + gui::p2pX(2.5f, this->vm)
 			)
 		{
-			this->coins.erase(this->coins.begin()+i)
+			this->coins.erase(this->coins.begin()+i);
 		}
 	}
 
