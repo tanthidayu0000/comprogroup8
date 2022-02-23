@@ -9,7 +9,7 @@ void Heart::initTexture()
 	}
 }
 
-void HEART::initSprite(float x, float y, const VideoMode& vm)
+void Heart::initSprite(float x, float y, const VideoMode& vm)
 {
 	this->heart.setTexture(&this->textureSheet, true);
 
@@ -22,7 +22,6 @@ Heart::Heart(float x, float y, const VideoMode& vm)
 {
 	this->initTexture();
 	this->initSprite(x, y, vm);
-	this->initAnimations();
 }
 
 Heart::~Heart()
