@@ -32,6 +32,7 @@ private:
 	Font font;
 	bool showtext;
 	int count;
+	float time;
 
 	void initVariables();
 	void initPlayers();

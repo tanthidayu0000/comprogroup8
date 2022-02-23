@@ -3,7 +3,7 @@
 
 void Map1::initVariables()
 {
-
+	this->time = 0.f;
 	this->showtext = false;
 	this->count = 0;
 
@@ -298,6 +298,11 @@ void Map1::render(RenderTarget* target)
 		if(this->showtext)
 		{
 			target->draw(this->text);
-			this->showtext = false;
+			this->time += 1.f;
+			if (this->time >= 100.f)
+			{
+				this->showtext = false;
+				this->time = 0.f;
+			}
 		}
 }
