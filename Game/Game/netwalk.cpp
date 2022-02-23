@@ -87,17 +87,17 @@ void drop(Vector2i v)
 }
 
 
-int puzzle2()
+int Puzzle::puzzle3()
 {
     srand(time(0));
 
     RenderWindow app(VideoMode(390, 390), "The Pipe Puzzle!");
 
     Texture t1, t2, t3, t4;
-    t1.loadFromFile("images/background.png");
-    t2.loadFromFile("images/comp.png");
-    t3.loadFromFile("images/server.png");
-    t4.loadFromFile("images/pipes.png");
+    t1.loadFromFile("puzzle/background.png");
+    t2.loadFromFile("puzzle/comp.png");
+    t3.loadFromFile("puzzle/server.png");
+    t4.loadFromFile("puzzle/pipes.png");
     t4.setSmooth(true);
 
     Sprite sBackground(t1), sComp(t2), sServer(t3), sPipe(t4);
