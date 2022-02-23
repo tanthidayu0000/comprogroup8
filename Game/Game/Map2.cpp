@@ -3,6 +3,7 @@
 
 void Map2::initVariables()
 {
+	this->time = 0.f;
 	this->showtext = false;
 
 	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
@@ -325,6 +326,11 @@ void Map2::render(RenderTarget* target)
 	if(this->showtext)
 		{
 			target->draw(this->text);
-			this->showtext = false;
+			this->time += 1.f;
+			if (this->time >= 100.f)
+			{
+				this->showtext = false;
+				this->time = 0.f;
+			}
 		}
 }
