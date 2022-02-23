@@ -25,7 +25,7 @@ void Map3::initVariables()
 		string tileLocation;
 		openfile >> tileLocation;
 		this->tileTexture.loadFromFile(tileLocation);
-		this->tiles.setTexture(&this->tileTexture);
+		this->tiles.setTexture(&this->tileTexture, true);
 		this->tiles.setSize(Vector2f(this->width, this->height));
 		while (!openfile.eof())
 		{
@@ -57,12 +57,12 @@ void Map3::initPlayers()
 
 void Map3::initEnemy()
 {
-	this->enemy = new Enemy(100.f, gui::p2pX(3.3f, this->vm), gui::p2pY(17.8f, this->vm));
+	this->enemy = new Enemy(100.f, gui::p2pX(6.6f, this->vm), gui::p2pY(35.5f, this->vm));
 }
 
 void Map3::initBox()
 {
-	this->box = new Box(gui::p2pX(82.5f, this->vm), gui::p2pY(53.3f, this->vm), this->vm);
+	this->box = new Box(gui::p2pX(82.5f, this->vm), gui::p2pY(53.33f, this->vm), this->vm);
 }
 
 Map3::Map3(float width, float height, const VideoMode& vm)
@@ -86,7 +86,7 @@ void Map3::updateDeath()
 	if (this->player->getPos().x + this->player->getGlobalBounds().x > this->enemy->getPos().x + gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().x < this->enemy->getPos().x + this->enemy->getGlobalBounds().x - gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().y > this->enemy->getPos().y + this->enemy->getGlobalBounds().y / 3 &&
-		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(2.9f, this->vm)
+		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(3.5f, this->vm)
 		)
 	{
 		this->player->setPosition

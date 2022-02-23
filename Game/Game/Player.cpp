@@ -138,11 +138,11 @@ void Player::updateMovement(const VideoMode& vm)
 	{
 		if (this->currentFrame.top == 0.f)
 		{
-			this->sprite.move(0.f, -gui::p2pY(2.7f, vm));
+			this->sprite.move(0.f, -gui::p2pY(2.4f, vm));
 		}
 		else if (this->currentFrame.top == 32.f)
 		{
-			this->sprite.move(0.f, -gui::p2pY(2.7f, vm));
+			this->sprite.move(0.f, -gui::p2pY(2.4f, vm));
 		}
 
 		this->animState = PLAYER_ANIMATION_STATES::JUMPING;
