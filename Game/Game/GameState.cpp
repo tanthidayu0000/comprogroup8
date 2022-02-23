@@ -158,6 +158,12 @@ void GameState::render(RenderTarget* target)
 	else
 		this->endState();
 
+	for (int i = 0; i < this->heart.size(); i++)
+	{
+		this->heart[i]->render(target);
+	}
+	
+
 	if (this->paused)
 	{
 		this->pmenu->render(*target);
