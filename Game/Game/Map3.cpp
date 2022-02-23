@@ -3,8 +3,25 @@
 
 void Map3::initVariables()
 {
-
+	this->time = 0.f;
+	this->showtext = false;
 	this->count = 0;
+
+	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))
+	{
+		throw("ERROR::MAP3::CLOUD NOT LOAD FONT");
+	}
+
+	this->text.setCharacterSize(80);
+	this->text.setFont(this->font);
+	this->text.setFillColor(Color::White);
+	this->text.setOutlineColor(Color::Black);
+	this->text.setOutlineThickness(2);
+	this->text.setString("You must pick up all coins and open box.");
+	this->text.setOrigin(this->text.getGlobalBounds().width / 2, this->text.getGlobalBounds().height / 2);
+	this->text.setPosition(this->vm.width / 2, this->vm.height / 2);
+
+	this->bg.loadFromFile("Background/dark.jpg");
 
 	this->background.setSize(
 		Vector2f(
@@ -12,7 +29,6 @@ void Map3::initVariables()
 			static_cast<float>(this->vm.height)
 		)
 	);
-	this->bg.loadFromFile("Background/dark.jpg");
 	this->background.setTexture(&this->bg);
 
 	this->brickX.insert(this->brickX.begin(), 0);
@@ -109,8 +125,8 @@ void Map3::updatePlayagain()
 		{
 			this->endState();
 		}
-		//else
-			//this->showtext = true;
+		else
+			this->showtext = true;
 	}
 }
 
@@ -311,6 +327,16 @@ void Map3::render(RenderTarget* target)
 	this->box->render(target);
 	this->player->render(target);
 	this->enemy->render(target);
+	if (this->showtext)
+	{
+		target->draw(this->text);
+		this->time += 1.f;
+		if (this->time >= 100.f)
+		{
+			this->showtext = false;
+			this->time = 0.f;
+		}
+	}
 }
 
 

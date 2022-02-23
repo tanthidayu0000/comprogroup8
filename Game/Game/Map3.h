@@ -32,6 +32,11 @@ private:
 
 	int count;
 
+	Text text;
+	Font font;
+	bool showtext;
+	float time;
+
 	void initVariables();
 	void initPlayers();
 	void initEnemy();
