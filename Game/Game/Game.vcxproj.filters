@@ -90,6 +90,9 @@
     <ClCompile Include="Box.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
@@ -144,6 +147,9 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
       <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,8 @@
 
 void Map1::initVariables()
 {
+	this->count = 0;
+
 	this->background.setSize(
 		Vector2f(
 			static_cast<float>(this->vm.width),
@@ -82,6 +84,20 @@ void Map1::updateChangeMap()
 	}
 }
 
+void Map1::updateCoin()
+{
+	for (int i = 1, j = 1; i < this->brickX.size(), j < this->brickY.size(); i += 2, j++)
+	{
+		if (this->count == 0)
+		{
+			if (this->brickX[i] == this->box->getPos().x && this->brickY[j] >= this->box->getPos().y) continue;
+			this->coins.push_back(new Coin(this->brickX[i], this->brickY[j] - gui::p2pY(4.45f, this->vm), this->vm));
+		}
+		else break;
+	}
+	this->count++;
+}
+
 void Map1::updateCollision()
 {
 	for (int i = 1, j = 1; i < this->brickX.size(), j < this->brickY.size(); i += 2, j++)
@@ -134,6 +150,12 @@ void Map1::update()
 {
 	this->player->update(this->vm);
 	this->updateCollision();
+	this->updateCoin();
+
+	for (int i = 0; i < this->coins.size(); i++)
+	{
+		this->coins[i]->update();
+	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::Enter) && 
 		this->player->getPos().y + this->player->getGlobalBounds().y / 2 >= this->box->getPos().y &&
@@ -222,6 +244,11 @@ void Map1::render(RenderTarget* target)
 				check2 = 0;
 			}
 		}
+	}
+
+	for (int i = 0; i < this->coins.size(); i++)
+	{
+		this->coins[i]->render(target);
 	}
 
 	this->box->render(target);

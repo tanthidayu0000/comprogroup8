@@ -5,6 +5,7 @@
 #include "Gui.h"
 #include "Player.h"
 #include "Box.h"
+#include "Coin.h"
 
 class Map1 :
 	public Map
@@ -24,6 +25,9 @@ private:
 
 	Player* player;
 	Box* box;
+	vector<Coin*> coins;
+
+	int count;
 
 	void initVariables();
 	void initPlayers();
@@ -35,6 +39,7 @@ public:
 
 	void updateChangeMap();
 
+	void updateCoin();
 	void updateCollision();
 	void update();
 	void render(RenderTarget* target);
