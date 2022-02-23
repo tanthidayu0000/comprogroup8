@@ -5,6 +5,7 @@
 #include "Gui.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Box.h"
 
 class Map2 :
 	public Map
@@ -24,10 +25,12 @@ private:
 
 	Player* player;
 	Enemy* enemy;
+	Box* box;
 
 	void initVariables();
 	void initPlayers();
 	void initEnemy();
+	void initBox();
 
 public:
 	Map2(float width, float height, const VideoMode& vm);

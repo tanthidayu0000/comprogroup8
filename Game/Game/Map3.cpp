@@ -58,18 +58,25 @@ void Map3::initEnemy()
 	this->enemy = new Enemy(100.f, gui::p2pX(3.3f, this->vm), gui::p2pY(17.8f, this->vm));
 }
 
+void Map3::initBox()
+{
+	this->box = new Box(gui::p2pX(82.5f, this->vm), gui::p2pY(53.3f, this->vm), this->vm);
+}
+
 Map3::Map3(float width, float height, const VideoMode& vm)
 	: Map(width, height, vm)
 {
 	this->initVariables();
 	this->initPlayers();
 	this->initEnemy();
+	this->initBox();
 }
 
 Map3::~Map3()
 {
 	delete this->player;
 	delete this->enemy;
+	delete this->box;
 }
 
 void Map3::updateDeath()
@@ -141,6 +148,16 @@ void Map3::update()
 	this->player->update(this->vm);
 	this->enemy->update(this->vm);
 	this->updateCollision();
+
+	if (Keyboard::isKeyPressed(Keyboard::Key::Enter) &&
+		this->player->getPos().y + this->player->getGlobalBounds().y / 2 >= this->box->getPos().y &&
+		this->player->getPos().y + this->player->getGlobalBounds().y / 2 <= this->box->getPos().y + gui::p2pY(4.45f, this->vm) &&
+		this->player->getPos().x + this->player->getGlobalBounds().x / 2 >= this->box->getPos().x &&
+		this->player->getPos().x + this->player->getGlobalBounds().x / 2 <= this->box->getPos().x + gui::p2pX(2.5f, this->vm)
+		)
+	{
+		this->box->update();
+	}
 
 	this->updateDeath();
 }
@@ -231,6 +248,7 @@ void Map3::render(RenderTarget* target)
 		}
 	}
 
+	this->box->render(target);
 	this->player->render(target);
 	this->enemy->render(target);
 }

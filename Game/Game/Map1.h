@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Gui.h"
 #include "Player.h"
+#include "Box.h"
 
 class Map1 :
 	public Map
@@ -22,9 +23,11 @@ private:
 	vector<float> brickY;
 
 	Player* player;
+	Box* box;
 
 	void initVariables();
 	void initPlayers();
+	void initBox();
 
 public:
 	Map1(float width, float height, const VideoMode& vm);
