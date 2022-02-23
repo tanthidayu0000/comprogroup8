@@ -12,13 +12,14 @@ void Map1::initVariables()
 		throw("ERROR::MAP1::CLOUD NOT LOAD FONT");
 	}
 	
-	this->text.setCharacterSize(20);
+	this->text.setCharacterSize(80);
 	this->text.setFont(this->font);
 	this->text.setFillColor(Color::White);
 	this->text.setOutlineColor(Color::Black);
-	this->text.setOutlineThickness(1);
+	this->text.setOutlineThickness(2);
 	this->text.setString("You must pick up all coins and open box.");
-	this->text.setPosition(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
+	this->text.setOrigin(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
+	this->text.setPosition(this->vm.width/2, this->vm.height/2);
 
 	this->background.setSize(
 		Vector2f(
