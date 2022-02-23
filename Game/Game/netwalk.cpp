@@ -87,7 +87,7 @@ void drop(Vector2i v)
 }
 
 
-int puzzle2()
+int Puzzle::puzzle2()
 {
     srand(time(0));
 
