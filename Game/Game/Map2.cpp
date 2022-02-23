@@ -205,7 +205,7 @@ void Map2::updateCollision()
 	}
 }
 
-void Map2::update()
+void Map2::update(Vector2f mouseposview)
 {
 	this->player->update(this->vm);
 	this->enemy->update(this->vm);

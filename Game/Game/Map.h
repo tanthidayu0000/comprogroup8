@@ -11,6 +11,7 @@ protected:
 	float width;
 	float height;
 
+	bool restart;
 	bool changeMap;
 
 public:
@@ -19,9 +20,10 @@ public:
 
 	const bool& getChangeMap() const;
 
+	const bool updaterestart();
 	void endState();
 
-	virtual void update() = 0;
+	virtual void update(Vector2f mouseposview) = 0;
 	virtual void render(RenderTarget* target) = 0;
 };
 

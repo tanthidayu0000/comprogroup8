@@ -12,6 +12,7 @@ class Map3 :
 	public Map
 {
 private:
+	Texture bg;
 	RectangleShape background;
 
 	Texture tileTexture;
@@ -42,9 +43,11 @@ public:
 
 	void updateDeath();
 
+	void updatePlayagain();
+
 	void updateCoin();
 	void updateCollision();
-	void update();
+	void update(Vector2f mouseposview);
 	void render(RenderTarget* target);
 
 };

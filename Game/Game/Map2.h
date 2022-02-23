@@ -49,7 +49,7 @@ public:
 
 	void updateCoin();
 	void updateCollision();
-	void update();
+	void update(Vector2f mouseposview);
 	void render(RenderTarget* target);
 
 };

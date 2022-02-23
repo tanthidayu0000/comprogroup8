@@ -7,6 +7,7 @@ Map::Map(float width, float height, const VideoMode& vm)
 	this->height = height;
 	this->vm = vm;
 	this->changeMap = false;
+	this->restart = false;
 }
 
 Map::~Map()
@@ -17,6 +18,11 @@ Map::~Map()
 const bool& Map::getChangeMap() const
 {
 	return this->changeMap;
+}
+
+const bool Map::updaterestart()
+{
+	return this->restart;
 }
 
 void Map::endState()

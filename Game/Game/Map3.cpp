@@ -3,6 +3,7 @@
 
 void Map3::initVariables()
 {
+
 	this->count = 0;
 
 	this->background.setSize(
@@ -11,7 +12,8 @@ void Map3::initVariables()
 			static_cast<float>(this->vm.height)
 		)
 	);
-	this->background.setFillColor(Color::Black);
+	this->bg.loadFromFile("Background/dark.jpg");
+	this->background.setTexture(&this->bg);
 
 	this->brickX.insert(this->brickX.begin(), 0);
 	this->brickY.insert(this->brickY.begin(), 0);
@@ -97,6 +99,21 @@ void Map3::updateDeath()
 	}
 }
 
+void Map3::updatePlayagain()
+{
+	if (this->player->getPos().x >= gui::p2pX(97.5f, this->vm) &&
+		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
+		Keyboard::isKeyPressed(Keyboard::Key::Enter))
+	{
+		if (this->coins.empty() && this->box->openbox())
+		{
+			this->endState();
+		}
+		//else
+			//this->showtext = true;
+	}
+}
+
 void Map3::updateCoin()
 {
 	for (int i = 1, j = 1; i < this->brickX.size(), j < this->brickY.size(); i += 2, j++)
@@ -174,8 +191,9 @@ void Map3::updateCollision()
 	}
 }
 
-void Map3::update()
+void Map3::update(Vector2f mouseposview)
 {
+	this->updatePlayagain();
 	this->player->update(this->vm);
 	this->enemy->update(this->vm);
 	this->updateCollision();

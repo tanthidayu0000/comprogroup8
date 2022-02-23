@@ -21,13 +21,15 @@ void Map1::initVariables()
 	this->text.setOrigin(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
 	this->text.setPosition(this->vm.width/2, this->vm.height/2);
 
+	this->bg.loadFromFile("Background/bgMap.png");
+
 	this->background.setSize(
 		Vector2f(
 			static_cast<float>(this->vm.width),
 			static_cast<float>(this->vm.height)
 		)
 	);
-	this->background.setFillColor(Color::Black);
+	this->background.setTexture(&this->bg);
 
 	this->brickX.insert(this->brickX.begin(), 0);
 	this->brickY.insert(this->brickY.begin(), 0);
@@ -183,7 +185,7 @@ void Map1::updateCollision()
 	}
 }
 
-void Map1::update()
+void Map1::update(Vector2f mouseposview)
 {
 	this->player->update(this->vm);
 	this->updateCollision();
