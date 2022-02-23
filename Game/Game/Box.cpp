@@ -21,6 +21,7 @@ void Box::initSprite(float x, float y, const VideoMode& vm)
 
 Box::Box(float x, float y, const VideoMode& vm)
 {
+	this->open = false;
 	this->initTexture();
 	this->initSprite(x, y, vm);
 }
@@ -40,6 +41,11 @@ const Vector2f Box::getPos()
 	return this->box.getPosition();
 }
 
+bool Box::openbox()
+{
+	return this->open;
+}
+
 void Box::update()
 {
 	if (this->currentFrame.left == 0.f)
@@ -50,6 +56,7 @@ void Box::update()
 			this->box.setTextureRect(this->currentFrame);
 		}
 	}
+	this->open = true;
 }
 
 void Box::render(RenderTarget* target)

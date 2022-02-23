@@ -9,6 +9,7 @@ private:
     RectangleShape box;
     Texture textureSheet;
     IntRect currentFrame;
+    bool open;
 
     void initTexture();
     void initSprite(float x, float y, const VideoMode& vm);
@@ -20,6 +21,7 @@ public:
     const Vector2f getGlobalBounds() const;
     const Vector2f getPos();
 
+    bool openbox();
     void update();
     void render(RenderTarget* target);
 };
