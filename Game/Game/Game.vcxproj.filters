@@ -45,9 +45,6 @@
     <ClCompile Include="State.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -92,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="Coin.cpp">
       <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Playagainstate.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Coin.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Playagainstate.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

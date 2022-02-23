@@ -44,6 +44,8 @@ void GameState::initMap()
 {
 	const VideoMode& vm = this->stateData->gfxSettings->resolution;
 
+	this->maps.push(new Playagain(vm.width, vm.height, vm));
+
 	this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 	this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
@@ -95,14 +97,20 @@ void GameState::update(const float& dt)
 	this->updateKeyTime(dt);
 	this->updateInput(dt);
 	
+	
 	if (!this->paused)
 	{
 		if (!this->maps.empty())
 		{
 			if (this->window->hasFocus())
 			{
-				this->maps.top()->update();
+				this->maps.top()->update(this->mousePosView);
 
+				if (this->maps.top()->updaterestart())
+				{
+					this->states->pop();
+					this->states->push(new GameState(this->stateData));
+				}
 				if (this->maps.top()->getChangeMap())
 				{
 					this->maps.top()->endState();
@@ -128,6 +136,8 @@ void GameState::render(RenderTarget* target)
 
 	if (!this->maps.empty())
 		this->maps.top()->render(target);
+	else
+		this->endState();
 
 	if (this->paused)
 	{
