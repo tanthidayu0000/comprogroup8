@@ -10,7 +10,7 @@ void MainMenuState::initVariables()
 	this->topic.setFillColor(Color(255, 255, 255, 200));
 	this->topic.setString("MYSTERY WORLD");
 	this->topic.setOrigin(this->topic.getGlobalBounds().width / 2, this->topic.getGlobalBounds().height / 2);
-	this->topic.setPosition(Vector2f(gui::p2pX(50.f, vm), gui::p2pY(30.f, vm)));
+	this->topic.setPosition(Vector2f(gui::p2pX(50.f, vm), gui::p2pY(35.f, vm)));
 }
 
 void MainMenuState::initFonts()

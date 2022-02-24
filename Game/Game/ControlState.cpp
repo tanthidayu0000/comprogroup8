@@ -102,13 +102,13 @@ void ControlState::initGui()
 	);
 
 	this->or_.setFont(font);
-	this->or_.setPosition(Vector2f(gui::p2pX(55.f, vm), gui::p2pY(43.f, vm)));
+	this->or_.setPosition(Vector2f(gui::p2pX(60.f, vm), gui::p2pY(43.f, vm)));
 	this->or_.setCharacterSize(gui::calcCharSize(vm));
 	this->or_.setFillColor(Color(255, 255, 255, 200));
 	this->or_.setString("Or");
 
 	this->buttons["UP"] = new gui::Button(
-		gui::p2pX(63.f, vm), gui::p2pY(40.f, vm),
+		gui::p2pX(73.f, vm), gui::p2pY(40.f, vm),
 		gui::p2pX(3.f, vm), gui::p2pY(5.3f, vm),
 		&this->symbol, "^", gui::calcCharSize(vm),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200),
@@ -116,7 +116,7 @@ void ControlState::initGui()
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200)
 	);
 	this->buttons["LEFT"] = new gui::Button(
-		gui::p2pX(60.f, vm), gui::p2pY(45.4f, vm),
+		gui::p2pX(70.f, vm), gui::p2pY(45.4f, vm),
 		gui::p2pX(3.f, vm), gui::p2pY(5.3f, vm),
 		&this->symbol, "<", gui::calcCharSize(vm),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200),
@@ -124,7 +124,7 @@ void ControlState::initGui()
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200)
 	);
 	this->buttons["DOWN"] = new gui::Button(
-		gui::p2pX(63.f, vm), gui::p2pY(45.4f, vm),
+		gui::p2pX(73.f, vm), gui::p2pY(45.4f, vm),
 		gui::p2pX(3.f, vm), gui::p2pY(5.3f, vm),
 		&this->symbol, "|", gui::calcCharSize(vm),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200),
@@ -132,7 +132,7 @@ void ControlState::initGui()
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200)
 	);
 	this->buttons["RIGHT"] = new gui::Button(
-		gui::p2pX(66.f, vm), gui::p2pY(45.4f, vm),
+		gui::p2pX(76.f, vm), gui::p2pY(45.4f, vm),
 		gui::p2pX(3.f, vm), gui::p2pY(5.3f, vm),
 		&this->symbol, ">", gui::calcCharSize(vm),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200),
@@ -162,7 +162,7 @@ void ControlState::initGui()
 	this->puzzle.setString("Open Box / Door");
 
 	this->buttons["ENTER"] = new gui::Button(
-		gui::p2pX(42.f, vm), gui::p2pY(80.f, vm),
+		gui::p2pX(45.f, vm), gui::p2pY(80.f, vm),
 		gui::p2pX(9.f, vm), gui::p2pY(5.5f, vm),
 		&this->font, "Enter", gui::calcCharSize(vm),
 		Color(255, 255, 255, 200), Color(255, 255, 255, 200), Color(255, 255, 255, 200),
