@@ -124,6 +124,16 @@ void Map1::updateChangeMap()
 	}
 }
 
+bool Map1::gameover()
+{
+	if (this->heart.empty())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
 void Map1::updateCoin()
 {
 	for (int i = 1, j = 1; i < this->brickX.size(), j < this->brickY.size(); i += 2, j++)

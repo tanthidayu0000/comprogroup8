@@ -29,6 +29,7 @@ public:
 	const bool updaterestart();
 	void endState();
 
+	virtual bool gameover() = 0;
 	virtual void update(Vector2f mouseposview, RenderWindow* window) = 0;
 	virtual void render(RenderTarget* target) = 0;
 };

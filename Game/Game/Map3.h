@@ -60,6 +60,7 @@ public:
 
 	void updatePlayagain();
 
+	bool gameover();
 	void updateHeart();
 
 	void updateCoin();

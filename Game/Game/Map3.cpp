@@ -149,6 +149,16 @@ void Map3::updatePlayagain()
 	}
 }
 
+bool Map3::gameover()
+{
+	if (this->heart.empty())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
 void Map3::updateHeart()
 {
 	if (this->damage == 1.f)

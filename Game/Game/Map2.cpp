@@ -149,8 +149,20 @@ void Map2::updateDeath()
 	}
 }
 
+bool Map2::gameover()
+{
+	if (this->heart.empty())
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+
 void Map2::updateHeart()
 {
+	
 	if (this->damage == 1.f)
 	{
 		this->heart.pop_back();

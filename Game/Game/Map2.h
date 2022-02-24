@@ -56,6 +56,7 @@ public:
 
 	void updateChangeMap();
 
+	bool gameover();
 	void updateHeart();
 	void updateDeath();
 

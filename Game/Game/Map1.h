@@ -53,6 +53,8 @@ public:
 
 	void updateChangeMap();
 
+	bool gameover();
+
 	void updateCoin();
 	void updateCollision();
 	void update(Vector2f mouseposview, RenderWindow* window);
