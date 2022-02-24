@@ -8,6 +8,7 @@ Map::Map(float width, float height, const VideoMode& vm)
 	this->vm = vm;
 	this->changeMap = false;
 	this->restart = false;
+	this->numheart = 3;
 	this->damage = 0;
 	this->checkPuz = false;
 }

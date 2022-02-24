@@ -14,6 +14,8 @@ protected:
 	bool restart;
 	bool changeMap;
 
+
+	int numheart;
 	int damage;
 
 	bool checkPuz;

@@ -85,7 +85,7 @@ void Map1::initDoor()
 
 void Map1::initheart()
 {
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < this->numheart; i++)
 	{
 		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
 	}
