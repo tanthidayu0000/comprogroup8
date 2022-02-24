@@ -114,6 +114,9 @@
     <ClCompile Include="Door.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="gameoverstate.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="Door.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="gameoverstate.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

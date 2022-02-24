@@ -7,7 +7,7 @@
 #include "Map3.h"
 #include "PauseMenu.h"
 #include "Playagainstate.h"
-
+#include "gameoverstate.h"
 
 class GameState :
     public State
@@ -30,6 +30,7 @@ private:
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
+ 
 
     void updateInput(const float& dt);
     void updatePauseMenuButtons();

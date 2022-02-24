@@ -19,6 +19,8 @@ public:
 	Playagain(float width, float height, const VideoMode& vm);
 	virtual ~Playagain();
 
+	bool gameover();
+
 	void updateGui(Vector2f mouseposview);
 	void update(Vector2f mouseposview, RenderWindow* window);
 

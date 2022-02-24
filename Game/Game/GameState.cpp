@@ -46,9 +46,9 @@ void GameState::initMap()
 
 	this->maps.push(new Playagain(vm.width, vm.height, vm));
 
-	this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	//this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 	this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
-	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	//this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 }
 
 
@@ -107,6 +107,11 @@ void GameState::update(const float& dt)
 			if (this->window->hasFocus())
 			{
 				this->maps.top()->update(this->mousePosView, this->window);
+				if (this->maps.top()->gameover())
+				{
+					this->states->pop();
+					this->states->push(new Gameover(this->stateData));
+				}
 
 				if (this->maps.top()->updaterestart())
 				{

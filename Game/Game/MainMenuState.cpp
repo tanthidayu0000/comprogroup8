@@ -55,30 +55,30 @@ void MainMenuState::initGui()
 	this->background.setTexture(&this->backgroundTexture);
 	
 	this->buttons["GAME_STATE"] = new gui::Button(
-		gui::p2pX(44.8f, vm), gui::p2pY(62.f, vm),
+		gui::p2pX(30.f, vm), gui::p2pY(69.4f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Start", gui::calcCharSize(vm,70),
+		&this->font, "Start", gui::calcCharSize(vm,65),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["CONTROL_STATE"] = new gui::Button(
-		gui::p2pX(44.8f, vm), gui::p2pY(69.4f, vm),
+		gui::p2pX(55.f, vm), gui::p2pY(69.4f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Control", gui::calcCharSize(vm,70),
+		&this->font, "Control", gui::calcCharSize(vm,65),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["CREDITS_STATE"] = new gui::Button(
-		gui::p2pX(44.8f, vm), gui::p2pY(76.9f, vm),
+		gui::p2pX(30.f, vm), gui::p2pY(80.f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Credits", gui::calcCharSize(vm,70),
+		&this->font, "Credits", gui::calcCharSize(vm,65),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(70, 70, 70, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
 	this->buttons["EXIT_STATE"] = new gui::Button(
-		gui::p2pX(44.8f, vm), gui::p2pY(84.3f, vm),
+		gui::p2pX(55.f, vm), gui::p2pY(80.f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(7.4f, vm),
-		&this->font, "Quit", gui::calcCharSize(vm,70),
+		&this->font, "Quit", gui::calcCharSize(vm,65),
 		Color(200, 200, 200, 200), Color(255, 255, 255, 255), Color(20, 20, 20, 50),
 		Color(100, 100, 100, 0), Color(150, 150, 150, 0), Color(20, 20, 20, 0));
 
