@@ -34,6 +34,9 @@
     <Filter Include="puzzles">
       <UniqueIdentifier>{88791008-4af0-4bfb-abef-8601f0cf9142}</UniqueIdentifier>
     </Filter>
+    <Filter Include="15-Puzzle">
+      <UniqueIdentifier>{07c6c9f8-a794-400c-bb46-eb4c3cf50feb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +120,12 @@
     <ClCompile Include="gameoverstate.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="AllSprite.cpp">
+      <Filter>15-Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>15-Puzzle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
@@ -190,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="gameoverstate.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="AllSprite.h">
+      <Filter>15-Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>15-Puzzle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

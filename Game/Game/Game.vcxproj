@@ -160,7 +160,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllSprite.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -198,7 +200,9 @@
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllSprite.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />

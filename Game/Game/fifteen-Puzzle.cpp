@@ -1,78 +1,66 @@
 #include "includeAll.h"
 #include "puzzle.h"
+#include "AllSprite.h"
+#include "Cell.h"
+
+enum gameState { New, Play, Exit };
 
 int Puzzle::puzzle1()
 {
-    RenderWindow app(VideoMode(256, 256), "15-Puzzle!");
+    srand(time(0));
+
+    RenderWindow app(VideoMode(256, 256), "15-Puzzle!", Style::None);
     app.setFramerateLimit(60);
 
-    Texture t;
-    t.loadFromFile("puzzle/15.png");
- 
     int w = 64;
-    int grid[6][6] = { 0 };
-    Sprite sprite[20];
 
-    int n = 0;
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++)
-        {
-            n++;
-            sprite[n].setTexture(t);
-            sprite[n].setTextureRect(IntRect(i * w, j * w, w, w));
-            grid[i + 1][j + 1] = n;
-        }
+    gameState state = New;
+    AllSprite all;
 
     while (app.isOpen())
     {
         Event e;
+        if (state == New)
+        {
+            all.Shuffle();
+            state = Play;
+        }
+        if (state == Exit)
+        {
+            all.Shuffle();
+            app.close();
+        }
         while (app.pollEvent(e))
         {
-            if (e.type == Event::Closed)
-                app.close();
-
             if (e.type == Event::MouseButtonPressed)
+            {
                 if (e.key.code == Mouse::Left)
                 {
-                    Vector2i pos = Mouse::getPosition(app);
-                    int x = pos.x / w + 1;
-                    int y = pos.y / w + 1;
+                    Vector2i position = Mouse::getPosition(app);
+                    int x = position.x / w;
+                    int y = position.y / w;
+                    int emptyX = all.getEmptyPosition().x;
+                    int emptyY = all.getEmptyPosition().y;
+                    int dx = emptyX - x;
+                    int dy = emptyY - y;
 
-                    int dx = 0;
-                    int dy = 0;
-
-                    if (grid[x + 1][y] == 16) { dx = 1; dy = 0; };
-                    if (grid[x][y + 1] == 16) { dx = 0; dy = 1; };
-                    if (grid[x][y - 1] == 16) { dx = 0; dy = -1; };
-                    if (grid[x - 1][y] == 16) { dx = -1; dy = 0; };
-
-                    int n = grid[x][y];
-                    grid[x][y] = 16;
-                    grid[x + dx][y + dy] = n;
-
-                    //animation
-                    sprite[16].move(-dx * w, -dy * w);
-                    float speed = 3;
-
-                    for (int i = 0; i < w; i += speed)
+                    if (dx * dy == 0 && abs(dx + dy) == 1)
                     {
-                        sprite[n].move(speed * dx, speed * dy);
-                        app.draw(sprite[16]);
-                        app.draw(sprite[n]);
-                        app.display();
+                        all.Move(dx, dy);
                     }
                 }
-
+            }
+            if (all.checkCorrect())
+            {
+                state = Exit;
+            }
         }
 
         app.clear(Color::White);
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-            {
-                int n = grid[i + 1][j + 1];
-                sprite[n].setPosition(i * w, j * w);
-                app.draw(sprite[n]);
-            }
+        for (int i = 0; i < 15; i++)
+        {
+            app.draw(all.getSprite(i));
+        }
 
         app.display();
 
