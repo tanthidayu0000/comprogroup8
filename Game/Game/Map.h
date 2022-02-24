@@ -11,6 +11,8 @@ protected:
 	float width;
 	float height;
 
+	RectangleShape bgPuzzle;
+
 	bool restart;
 	bool changeMap;
 
@@ -21,6 +23,8 @@ protected:
 public:
 	Map(float width, float height, const VideoMode& vm);
 	virtual ~Map();
+
+	void renderBGpuzzle(RenderTarget* target);
 
 	const bool& getChangeMap() const;
 
