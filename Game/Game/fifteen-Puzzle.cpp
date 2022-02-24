@@ -27,7 +27,6 @@ int Puzzle::puzzle1()
         }
         if (state == Exit)
         {
-            all.Shuffle();
             app.close();
         }
         while (app.pollEvent(e))
