@@ -16,13 +16,11 @@ private:
 	void initGui();
 
 public:
-	
-
 	Playagain(float width, float height, const VideoMode& vm);
 	virtual ~Playagain();
 
 	void updateGui(Vector2f mouseposview);
-	void update(Vector2f mouseposview);
+	void update(Vector2f mouseposview, RenderWindow* window);
 
 	void renderGui(RenderTarget& target);
 	void render(RenderTarget* window);

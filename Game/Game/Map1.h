@@ -7,6 +7,8 @@
 #include "Box.h"
 #include "Coin.h"
 #include "heart.h"
+#include "Door.h"
+#include "puzzle.h"
 
 class Map1 :
 	public Map
@@ -29,6 +31,9 @@ private:
 	Box* box;
 	vector<Coin*> coins;
 	vector<Heart*> heart;
+	Door* door;
+
+	Puzzle* puzzle;
 
 	Text text;
 	Font font;
@@ -39,7 +44,7 @@ private:
 	void initVariables();
 	void initPlayers();
 	void initBox();
-
+	void initDoor();
 	void initheart();
 	
 public:
@@ -48,11 +53,9 @@ public:
 
 	void updateChangeMap();
 
-	int getdamage();
-
 	void updateCoin();
 	void updateCollision();
-	void update(Vector2f mouseposview);
+	void update(Vector2f mouseposview, RenderWindow* window);
 	void render(RenderTarget* target);
 };
 

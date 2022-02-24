@@ -108,6 +108,12 @@
     <ClCompile Include="minesweeper.cpp">
       <Filter>puzzles</Filter>
     </ClCompile>
+    <ClCompile Include="heart.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includeAll.h">
@@ -172,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="puzzle.h">
       <Filter>puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="heart.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

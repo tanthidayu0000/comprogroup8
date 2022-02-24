@@ -106,7 +106,7 @@ void GameState::update(const float& dt)
 		{
 			if (this->window->hasFocus())
 			{
-				this->maps.top()->update(this->mousePosView);
+				this->maps.top()->update(this->mousePosView, this->window);
 
 				if (this->maps.top()->updaterestart())
 				{

@@ -1,9 +1,5 @@
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include "puzzle.h"
 #include "includeAll.h"
-
-using namespace sf;
+#include "puzzle.h"
 
 int Puzzle::puzzle2()
 {

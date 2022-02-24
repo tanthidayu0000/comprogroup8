@@ -71,7 +71,7 @@ void Playagain::updateGui(Vector2f mouseposview)
 	}
 }
 
-void Playagain::update(Vector2f mouseposview)
+void Playagain::update(Vector2f mouseposview, RenderWindow* window)
 {
 	this->updateGui(mouseposview);
 }

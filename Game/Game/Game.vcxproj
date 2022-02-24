@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="fifteen-Puzzle.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="ControlState.cpp" />
     <ClCompile Include="CreditsState.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="heart.cpp" />
     <ClCompile Include="includeAll.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">includeAll.h</PrecompiledHeaderFile>
@@ -197,6 +199,7 @@
   <ItemGroup>
     <ClInclude Include="Box.h" />
     <ClInclude Include="Coin.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="Gui.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="CreditsState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="heart.h" />
     <ClInclude Include="includeAll.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Map.h" />

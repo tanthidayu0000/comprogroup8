@@ -9,6 +9,7 @@ Map::Map(float width, float height, const VideoMode& vm)
 	this->changeMap = false;
 	this->restart = false;
 	this->damage = 0;
+	this->checkPuz = false;
 }
 
 Map::~Map()
@@ -19,11 +20,6 @@ Map::~Map()
 const bool& Map::getChangeMap() const
 {
 	return this->changeMap;
-}
-
-int Map::getdamage()
-{
-	return this->damage;
 }
 
 const bool Map::updaterestart()

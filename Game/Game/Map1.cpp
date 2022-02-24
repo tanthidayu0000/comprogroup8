@@ -78,12 +78,16 @@ void Map1::initBox()
 	this->box = new Box(gui::p2pX(90.f, this->vm), gui::p2pY(8.8f, this->vm), this->vm);
 }
 
+void Map1::initDoor()
+{
+	this->door = new Door(gui::p2pX(97.5f, this->vm), gui::p2pY(80.f, this->vm), this->vm);
+}
+
 void Map1::initheart()
 {
 	for(int i = 0; i < 5; i++)
 	{
 		this->heart.push_back(new Heart(gui::p2pX(2.5f*(i+1), this->vm), gui::p2pY(4.45f, this->vm), this->vm));
-
 	}
 }
 
@@ -93,6 +97,7 @@ Map1::Map1(float width, float height, const VideoMode& vm)
 	this->initVariables();
 	this->initPlayers();
 	this->initBox();
+	this->initDoor();
 	this->initheart();
 }
 
@@ -100,12 +105,14 @@ Map1::~Map1()
 {
 	delete this->player;
 	delete this->box;
+	delete this->door;
+	delete this->puzzle;
 }
 
 void Map1::updateChangeMap()
 {
-	if (this->player->getPos().x >= gui::p2pX(97.5f, this->vm) &&
-		this->player->getPos().y >= this->ground.y - this->player->getGlobalBounds().y &&
+	if (this->player->getPos().x >= this->door->getPos().x &&
+		this->player->getPos().y >= this->door->getPos().y &&
 		Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
 		if(this->coins.empty() && this->box->openbox()) 
@@ -115,11 +122,6 @@ void Map1::updateChangeMap()
 		else
 			this->showtext = true;
 	}
-}
-
-int Map1::getdamage()
-{
-	return this->damage;
 }
 
 void Map1::updateCoin()
@@ -150,7 +152,6 @@ void Map1::updateCoin()
 	}
 
 }
-
 
 void Map1::updateCollision()
 {
@@ -200,7 +201,7 @@ void Map1::updateCollision()
 	}
 }
 
-void Map1::update(Vector2f mouseposview)
+void Map1::update(Vector2f mouseposview, RenderWindow* window)
 {
 	this->player->update(this->vm);
 	this->updateCollision();
@@ -215,9 +216,19 @@ void Map1::update(Vector2f mouseposview)
 		this->player->getPos().y + this->player->getGlobalBounds().y / 2 >= this->box->getPos().y &&
 		this->player->getPos().y + this->player->getGlobalBounds().y / 2 <= this->box->getPos().y + gui::p2pY(4.45f, this->vm) &&
 		this->player->getPos().x + this->player->getGlobalBounds().x / 2 >= this->box->getPos().x &&
-		this->player->getPos().x + this->player->getGlobalBounds().x / 2 <= this->box->getPos().x + gui::p2pX(2.5f, this->vm)
+		this->player->getPos().x + this->player->getGlobalBounds().x / 2 <= this->box->getPos().x + gui::p2pX(2.5f, this->vm) &&
+		!this->checkPuz
 		)
 	{
+		this->puzzle = new Puzzle();
+		if (this->puzzle != NULL)
+		{
+			if (window->hasFocus())
+			{
+				this->puzzle->puzzle1();
+			}
+		}
+		this->checkPuz = true;
 		this->box->update();
 	}
 
@@ -226,8 +237,6 @@ void Map1::update(Vector2f mouseposview)
 
 void Map1::render(RenderTarget* target)
 {
-	
-	
 	target->draw(this->background);
 
 	int k = 0, a = 0;
@@ -308,6 +317,7 @@ void Map1::render(RenderTarget* target)
 	}
 
 	this->box->render(target);
+	this->door->render(target);
 	this->player->render(target);
 	
 	if(this->showtext)

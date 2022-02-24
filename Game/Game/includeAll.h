@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include<ctime>
+#include<time.h>
 #include<cstdlib>
 
 #include<fstream>
