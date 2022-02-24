@@ -132,12 +132,7 @@ void Map3::updateDeath()
 			gui::p2pX(0.f, this->vm),
 			gui::p2pY(88.8f, this->vm)
 		);
-			
-		if (this->dtime >= 25.f)
-		{
-			this->damage += 1;
-			this->dtime = 0.f;
-		}
+		this->damage += 1;
 	}
 }
 
@@ -158,7 +153,7 @@ void Map3::updatePlayagain()
 
 void Map3::updateHeart()
 {
-	if (this->damage > 0)
+	if (this->damage == 1.f)
 	{
 		this->heart.pop_back();
 		this->dtime = 0.f;
