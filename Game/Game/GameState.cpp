@@ -46,9 +46,9 @@ void GameState::initMap()
 
 	this->maps.push(new Playagain(vm.width, vm.height, vm));
 
-	//this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	this->maps.push(new Map3(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 	this->maps.push(new Map2(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
-	//this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
+	this->maps.push(new Map1(gui::p2pX(2.5f, vm), gui::p2pY(4.45f, vm), vm));
 }
 
 
