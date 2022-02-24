@@ -142,25 +142,23 @@ void Map2::updateDeath()
 		this->player->getPos().y < this->enemy->getPos().y + this->enemy->getGlobalBounds().y - gui::p2pY(3.5f, this->vm)
 		)
 	{
-		if (this->damage == 5)
-		{
-			this->player->setPosition
-			(
-				gui::p2pX(0.f, this->vm),
-				gui::p2pY(88.8f, this->vm)
-			);
-			this->damage = 0;
-		}
-		else
+		this->player->setPosition
+		(
+			gui::p2pX(0.f, this->vm),
+			gui::p2pY(88.8f, this->vm)
+		);
+			
+		if (this->dtime >= 50.f)
 		{
 			this->damage += 1;
+			this->dtime = 0.f;
 		}
 	}
 }
 
 void Map2::updateHeart()
 {
-	if (this->damage > 0 && this->dtime >= 50.f)
+	if (this->damage > 0 )
 	{
 		this->heart.pop_back();
 		this->dtime = 0.f;
