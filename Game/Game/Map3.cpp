@@ -133,7 +133,7 @@ void Map3::updateDeath()
 			gui::p2pY(88.8f, this->vm)
 		);
 			
-		if (this->dtime >= 50.f)
+		if (this->dtime >= 25.f)
 		{
 			this->damage += 1;
 			this->dtime = 0.f;
