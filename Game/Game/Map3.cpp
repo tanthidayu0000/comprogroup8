@@ -119,7 +119,6 @@ Map3::~Map3()
 
 void Map3::updateDeath()
 {
-	this->dtime += 1.f;
 	if (this->player->getPos().x + this->player->getGlobalBounds().x > this->enemy->getPos().x + gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().x < this->enemy->getPos().x + this->enemy->getGlobalBounds().x - gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().y > this->enemy->getPos().y + this->enemy->getGlobalBounds().y / 3 &&
@@ -155,7 +154,7 @@ void Map3::updateHeart()
 	if (this->damage == 1.f)
 	{
 		this->heart.pop_back();
-		this->dtime = 0.f;
+		this->damage = 0.f;
 	}
 }
 

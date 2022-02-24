@@ -134,7 +134,6 @@ void Map2::updateChangeMap()
 
 void Map2::updateDeath()
 {
-	this->dtime += 1.f;
 	if (this->player->getPos().x + this->player->getGlobalBounds().x > this->enemy->getPos().x + gui::p2pX(1.5f, this->vm) &&
 		this->player->getPos().x < this->enemy->getPos().x  + this->enemy->getGlobalBounds().x - gui::p2pX(1.f, this->vm) &&
 		this->player->getPos().y > this->enemy->getPos().y + this->enemy->getGlobalBounds().y / 3 &&
