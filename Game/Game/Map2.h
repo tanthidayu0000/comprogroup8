@@ -15,6 +15,7 @@ class Map2 :
 	public Map
 {
 private:
+	Texture bg;
 	RectangleShape background;
 
 	Texture tileTexture;

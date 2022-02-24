@@ -21,7 +21,7 @@ void Map2::initVariables()
 	this->text.setOrigin(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
 	this->text.setPosition(this->vm.width/2, this->vm.height/2);
 
-	this->count = 0;
+	this->bg.loadFromFile("Background/map2d.jpg");
 
 	this->background.setSize(
 		Vector2f(
@@ -29,7 +29,7 @@ void Map2::initVariables()
 			static_cast<float>(this->vm.height)
 		)
 	);
-	this->background.setFillColor(Color::Cyan);
+	this->background.setTexture(&this->bg);
 
 	this->brickX.insert(this->brickX.begin(), 0);
 	this->brickY.insert(this->brickY.begin(), 0);
@@ -296,10 +296,10 @@ void Map2::render(RenderTarget* target)
 				if (i * width > gui::p2pX(100.f, this->vm)) continue;
 				check2++;
 				this->tiles.setPosition(i * this->width, j * this->height);
-				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 48, this->map[i][j].y * 48, 48, 48));
-				g2 = this->map[i + 1][j].x * 48;
-				g3 = this->map[i + 1][j].y * 48;
-				if (this->tiles.getTextureRect().left == 96 && this->tiles.getTextureRect().top == 0 && this->tiles.getTextureRect() == IntRect(g2, g3, 48, 48))
+				this->tiles.setTextureRect(IntRect(this->map[i][j].x * 24, this->map[i][j].y * 24, 24, 24));
+				g2 = this->map[i + 1][j].x * 24;
+				g3 = this->map[i + 1][j].y * 24;
+				if (this->tiles.getTextureRect().left == 72 && this->tiles.getTextureRect().top == 0 && this->tiles.getTextureRect() == IntRect(g2, g3, 24, 24))
 				{
 					if (g1 == 0)
 					{
@@ -308,7 +308,7 @@ void Map2::render(RenderTarget* target)
 					}
 				}
 				else if ((this->tiles.getTextureRect().left == 0 && this->tiles.getTextureRect().top == 0) ||
-						(this->tiles.getTextureRect().left == 96 && this->tiles.getTextureRect().top == 0))
+						(this->tiles.getTextureRect().left == 48 && this->tiles.getTextureRect().top == 0))
 				{
 					if (this->brickY[k] != this->tiles.getPosition().y)
 					{

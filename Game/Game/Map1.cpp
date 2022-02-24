@@ -21,7 +21,7 @@ void Map1::initVariables()
 	this->text.setOrigin(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
 	this->text.setPosition(this->vm.width/2, this->vm.height/2);
 
-	this->bg.loadFromFile("Background/bgMap.png");
+	this->bg.loadFromFile("Background/desert.png");
 
 	this->background.setSize(
 		Vector2f(
