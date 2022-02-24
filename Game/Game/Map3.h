@@ -44,7 +44,6 @@ private:
 	bool showtext;
 	float time;
 
-	float dtime;
 
 	void initVariables();
 	void initPlayers();

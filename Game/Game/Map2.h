@@ -42,7 +42,6 @@ private:
 	int count;
 	float time;
 
-	float dtime;
 
 	void initVariables();
 	void initPlayers();

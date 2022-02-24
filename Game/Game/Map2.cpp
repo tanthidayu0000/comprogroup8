@@ -5,7 +5,6 @@ void Map2::initVariables()
 {
 	this->damage = 0;
 	this->time = 0.f;
-	this->dtime = 0.f;
 	this->showtext = false;
 
 	if (!this->font.loadFromFile("Fonts/PatrickHand-Regular.ttf"))

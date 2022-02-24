@@ -4,7 +4,6 @@
 void Map3::initVariables()
 {
 	this->time = 0.f;
-	this->dtime = 0.f;
 	this->showtext = false;
 	this->count = 0;
 
