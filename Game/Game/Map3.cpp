@@ -264,13 +264,7 @@ void Map3::update(Vector2f mouseposview, RenderWindow* window)
 		)
 	{
 		this->puzzle = new Puzzle();
-		if (this->puzzle != NULL)
-		{
-			if (window->hasFocus())
-			{
-				this->puzzle->puzzle3();
-			}
-		}
+		this->puzzle->puzzle3();
 		this->checkPuz = true;
 		this->box->update();
 	}
