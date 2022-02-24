@@ -225,7 +225,6 @@ void Map1::update(Vector2f mouseposview, RenderWindow* window)
 		{
 			if (window->hasFocus())
 			{
-				this->renderBGpuzzle(window);
 				this->puzzle->puzzle1();
 			}
 		}
