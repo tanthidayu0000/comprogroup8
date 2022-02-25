@@ -204,7 +204,7 @@ int Puzzle::puzzle3()
                     num++;
                 }
             }
-        cout << num << " " << countcorrect << " " << check << "\n";
+        //cout << num << " " << countcorrect << " " << check << "\n";
 
         app.draw(sServer);
 

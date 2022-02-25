@@ -58,7 +58,8 @@ int Puzzle::puzzle2()
             {
                 state = Play;
             }
-            if (state == Exit)
+
+            if (e.type == Event::Closed)
             {
                 app.close();
             }

@@ -5,7 +5,7 @@ void Playagain::initGui()
 {
 	this->buttons["RESTART"] = new gui::Button(
 		gui::p2pX(25.f, this->vm), gui::p2pY(60.f, this->vm),
-		gui::p2pX(10.4f, this->vm), gui::p2pY(7.4f, this->vm),
+		gui::p2pX(16.5f, this->vm), gui::p2pY(7.4f, this->vm),
 		&this->font, "RESTART", gui::calcCharSize(this->vm, 40),
 		Color(Color(255, 153, 0)), Color(Color::Red), Color(20, 20, 20, 50),
 		Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0));
