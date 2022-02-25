@@ -53,7 +53,7 @@ int Puzzle::puzzle2()
         Event e;
         while (app.pollEvent(e))
         {
-            Event e;
+
             if (state == New)
             {
                 state = Play;
@@ -84,13 +84,7 @@ int Puzzle::puzzle2()
             for (int j = 1; j <= 10; j++)
             {
                 if (sgrid[x][y] == 9) sgrid[i][j] = grid[i][j];
-                while (sgrid[x][y] >= 10)
-                {
-                    app.display();
-                    app.close();
-                    app.isOpen();
-
-                }
+               
                 s.setTextureRect(IntRect(sgrid[i][j] * w, 0, w, w));
                 s.setPosition(i * w, j * w);
                 app.draw(s);
