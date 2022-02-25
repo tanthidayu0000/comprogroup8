@@ -41,6 +41,7 @@ int Puzzle::puzzle2()
             if (grid[i + 1][j - 1] == 9) n++;
             grid[i][j] = n;
         }
+
     gameState state = New;
 
     while (app.isOpen())
@@ -62,9 +63,18 @@ int Puzzle::puzzle2()
                 app.close();
             }
 
-            if (e.type == Event::MouseButtonPressed)
-                if (e.key.code == Mouse::Left) sgrid[x][y] = grid[x][y];
-                else if (e.key.code == Mouse::Right) sgrid[x][y] = 11;
+            if (e.type == Event::MouseButtonPressed) 
+            {
+                if (e.key.code == Mouse::Left)
+                    {
+                         sgrid[x][y] = grid[x][y];
+                    }
+                else if (e.key.code == Mouse::Right)
+                    {
+                        sgrid[x][y] = 11;
+                    }
+            }
+         
         }
 
         app.clear(Color::White);
