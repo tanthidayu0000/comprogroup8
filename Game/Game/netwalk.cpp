@@ -1,6 +1,8 @@
 #include "includeAll.h"
 #include "puzzle.h"
 
+enum gameState { New, Play, Exit };
+
 const int N = 6;
 int ts = 54; //tile size
 Vector2f offset(65, 55);
@@ -82,12 +84,15 @@ void drop(Vector2i v)
                 drop(v + d);
 }
 
-
 int Puzzle::puzzle3()
 {
     srand(time(0));
 
-    RenderWindow app(VideoMode(390, 390), "The Pipe Puzzle!");
+    RenderWindow app(VideoMode(390, 390), "The Pipe Puzzle!", Style::Titlebar || Style::Close);
+
+    gameState state = New;
+
+    bool checkcorrect = false;
 
     Texture t1, t2, t3, t4;
     t1.loadFromFile("puzzle/background.png");
@@ -100,7 +105,6 @@ int Puzzle::puzzle3()
     sPipe.setOrigin(27, 27);
     sComp.setOrigin(18, 18);
     sServer.setOrigin(20, 20);
-
 
     generatePuzzle();
 
@@ -130,7 +134,20 @@ int Puzzle::puzzle3()
 
     while (app.isOpen())
     {
+        int check = 0;
+        int countcorrect = 0;
+        int num = 0;
+
         Event e;
+        if (state == New)
+        {
+            state = Play;
+        }
+        if (state == Exit)
+        {
+            app.close();
+        }
+
         while (app.pollEvent(e))
         {
             if (e.type == Event::Closed)
@@ -174,14 +191,28 @@ int Puzzle::puzzle3()
 
                 if (kind == 1)
                 {
-                    if (p.on) sComp.setTextureRect(IntRect(53, 0, 36, 36));
-                    else sComp.setTextureRect(IntRect(0, 0, 36, 36));
+                    if (p.on)
+                    {
+                        sComp.setTextureRect(IntRect(53, 0, 36, 36));
+                        countcorrect++;
+                        check = 1;
+                    }
+                    else
+                        sComp.setTextureRect(IntRect(0, 0, 36, 36));
                     sComp.setPosition(j * ts, i * ts); sComp.move(offset);
                     app.draw(sComp);
+                    num++;
                 }
             }
+        cout << num << " " << countcorrect << " " << check << "\n";
 
         app.draw(sServer);
+
+        if (num - countcorrect == 0 && check == 1)
+        {
+            state = Exit;
+        }
+
         app.display();
     }
 
