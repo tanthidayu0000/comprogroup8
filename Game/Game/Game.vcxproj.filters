@@ -108,7 +108,7 @@
     <ClCompile Include="netwalk.cpp">
       <Filter>puzzles</Filter>
     </ClCompile>
-    <ClCompile Include="minesweeper.cpp">
+    <ClCompile Include="mainminesweeper.cpp">
       <Filter>puzzles</Filter>
     </ClCompile>
     <ClCompile Include="heart.cpp">
