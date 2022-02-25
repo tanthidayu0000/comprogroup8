@@ -17,7 +17,7 @@ void Map2::initVariables()
 	this->text.setFillColor(Color::White);
 	this->text.setOutlineColor(Color::Black);
 	this->text.setOutlineThickness(2);
-	this->text.setString("You must pick up all coins and open box.");
+	this->text.setString("You must be pick up all coins and open box.");
 	this->text.setOrigin(this->text.getGlobalBounds().width/2, this->text.getGlobalBounds().height/2);
 	this->text.setPosition(this->vm.width/2, this->vm.height/2);
 
