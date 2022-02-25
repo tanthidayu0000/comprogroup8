@@ -9,7 +9,7 @@ int Puzzle::puzzle1()
 {
     srand(time(0));
 
-    RenderWindow app(VideoMode(256, 256), "15-Puzzle!", Style::Titlebar || Style::Close);
+    RenderWindow app(VideoMode(256, 256), "15-Puzzle!", Style::Titlebar );
     app.setFramerateLimit(60);
 
     int w = 64;

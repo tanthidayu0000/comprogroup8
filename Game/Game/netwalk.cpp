@@ -88,7 +88,7 @@ int Puzzle::puzzle3()
 {
     srand(time(0));
 
-    RenderWindow app(VideoMode(390, 390), "The Pipe Puzzle!", Style::Titlebar || Style::Close);
+    RenderWindow app(VideoMode(390, 390), "The Pipe Puzzle!", Style::Titlebar);
 
     gameState state = New;
 
